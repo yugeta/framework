@@ -7,4 +7,7 @@ framework
 * 機能 : Function
 - 
 
+* 基本構成
+- login,logout
+- 認証後->toolモジュール実行
 

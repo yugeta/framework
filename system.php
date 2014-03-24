@@ -54,6 +54,7 @@ if($_REQUEST[check]){die('IDEACOMPO');}
 // FW 基本設定
 //----------
 
+//基本クラス読み込み※メインモジュール内に格納
 $ideacompo = new IDEACOMPO();
 
 //初期設定
