@@ -1,4 +1,4 @@
-DirectoryIndex system.php
+DirectoryIndex index.php
 AddDefaultCharset UTF-8
 AddLanguage jp .jp
 
@@ -11,8 +11,8 @@ php_value pcre.backtrack_limit 500000
 php_value pcre.recursion_limit 500000
 
 #upload
-php_value max_file_uploads 1000
-php_value max_execution_time 1000
+#php_value max_file_uploads 1000
+#php_value max_execution_time 1000
 
 #php_value max_execution_time 600
 #php_value upload_max_filesize 256M

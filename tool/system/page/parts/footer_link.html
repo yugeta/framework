@@ -1,0 +1,19 @@
+<div class='footer' style='text-align:center;margin-top:30px;'>
+	<!--
+	<a href='<!--%class:URL:url%-->'>TOP</a>
+	<span> | </span>
+	-->
+	<a href='?page=about'>このサイトについて</a>
+	<span> | </span>
+	<a href='?page=rules'>利用規約</a>
+	<span> | </span>
+	<a href='?page=contact'>問い合わせ</a>
+	<!--
+	<span> | </span>
+	<a href='?page=develop'>開発</a>
+	<span> | </span>
+	<!--%if:((!UID||UID=='UID')&&!$_REQUEST[page]):<a href='?sys=regist'>新規アカウント登録</a>%-->
+	<!--%if:((UID&&UID!='UID')&&!$_REQUEST[page]):<a href='?tool=account'>アカウント設定</a>%-->
+	<!--%class:SYS:system_tools%-->
+	-->
+</div>

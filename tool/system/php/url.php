@@ -8,16 +8,16 @@ class URL{
     //現在のポートの取得（80 , 443 , その他）
     function site(){
         //通常のhttp処理
-        if($_SERVER[SERVER_PORT]==80){
-        	$site = 'http://'.$_SERVER[SERVER_NAME];
+        if($_SERVER['SERVER_PORT']==80){
+        	$site = 'http://'.$_SERVER['SERVER_NAME'];
     	}
         //httpsページ処理
-    	else if($_SERVER[SERVER_PORT]==443){
-    		$site = 'https://'.$_SERVER[SERVER_NAME];
+    	else if($_SERVER['SERVER_PORT']==443){
+    		$site = 'https://'.$_SERVER['SERVER_NAME'];
     	}
         //その他ペート処理
     	else{
-    		$site = 'http://'.$_SERVER[SERVER_NAME].':'.$_SERVER[SERVER_PORT];
+    		$site = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
     	}
         
         return $site;
@@ -26,7 +26,7 @@ class URL{
     //現在ページのサービスroot階層のパスを返す
     function dir(){
         $uri = $this->site();
-        $dir = explode('/',$_SERVER[REQUEST_URI]);
+        $dir = explode('/',$_SERVER['REQUEST_URI']);
         if(count($dir)>1){
             $uri.= join('/',array_pop($dir));
         }
@@ -36,7 +36,7 @@ class URL{
     //現在のクエリ無しパスを返す
     function url(){
     	$uri = $this->site();
-    	$req = explode('?',$_SERVER[REQUEST_URI]);
+    	$req = explode('?',$_SERVER['REQUEST_URI']);
     	$uri.= $req[0];
     	return $uri;
     }
@@ -44,13 +44,13 @@ class URL{
     //フルパスを返す
     function uri(){
         $uri = $this->site();
-    	$uri.= $_SERVER[REQUEST_URI];
+    	$uri.= $_SERVER['REQUEST_URI'];
     	return $uri;
     }
     
     //基本ドメインを返す
     function domain(){
-		return $_SERVER[SERVER_NAME];
+		return $_SERVER['SERVER_NAME'];
     }
     
     //リダイレクト処理

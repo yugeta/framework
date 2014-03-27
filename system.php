@@ -1,58 +1,147 @@
 <?
 
-/**
-* Dtail ※フレームワーク
-* - Query（URL、パラメータ）※上位から優先順
-*   sys:システム関連のモードkey [login,logout]
-*   api:api（内部独立機能）[pictures,server_storage,]※WEBサービス
-*   mode:各種apiやsysの１階層下の機能※modeの連想配列で機能階層を持たせられる。
-*       [info,set,report,view]
-*   action:機能毎のサーバーアクション[write,delete,view,read]
-*   
-* - System（仕様）
-*   *.sys/php/の各種モジュールは基本CLASS形式
-*   
-*   
-* - その他仕様
-*   1) user-id:define user
-*       権限 0:一般 1~99:各種apiで利用 100:su 
-*       「data/sys/config.txt」：各種基本設定
-*           user_id_type:ユーザーIDタイプ / 0,null:通常(半角英数) mail:メールアドレス
-*           login_mode:ログイン画面の使用フラグ / 0,null,false:使用しない 1,true:使用する
-*       
-*       
-*   
-* - 機能
-*   １、パスワード○回間違えたらアカウント停止モード（権限別フラグ）
-*   ２、○日、○ヶ月毎に、パスワード更新を促すモード
-*   ３、
-* 
-* - 定数
-*   SYS:   system-folder
-*   UID:   user-id
-*   AUTH:  権限コード
-*   GROUP: グループコード
-*   
-* - グローバル変数
-*   $GLOBALS[user] : ユーザーデータ
-*   $GLOBALS[api]  : api関連初期設定
-*   $GLOBALS[config] : 各種configデータ（tool個別データも格納）
-* 
-* - config.txt
-*   name:サービス名
-*   name_class:ロゴ用class値（１文字タイプ）
-*   type:[service , system]
-* 
-* 
-**/
-//echo $_REQUEST[menu]."/".$_REQUEST[ini];
-//file_put_contents("test.dat" , "date=".date(YmdHis)."/tool=".$_REQUEST[tool]."/menu=".$_REQUEST[menu]."/ini=".$_REQUEST[ini]."\n" ,FILE_APPEND);
+/**********
+*Framework
+**********/
 
-if($_REQUEST[check]){die('IDEACOMPO');}
+//class定義
+$sys_common = new SYS_COMMON();
 
-//----------
-// FW 基本設定
-//----------
+//基本モジュール読み込み
+$sys_common->requires();
+
+//認証処理
+session_start();
+//die("cookie:".$_COOKIE['PHPSESSID']."/"."sess-id:".$_SESSION['id']);
+
+//初期設定
+$GLOBALS['system'] = $sys_common->loadConfig();
+if(!isset($_REQUEST['tool'])){
+    $_REQUEST['tool'] = 'system';
+}
+
+$cer_flg = 0;
+
+//認証（ログイン）処理
+if($_REQUEST['tool']=='system' && $_REQUEST['mode']=='login'){die("a");
+    
+    //認証成功
+    if($sys_common->login($_REQUEST['id'],$_REQUEST['pw'])){
+        
+        //リダイレクト
+        $url = new URL();
+        //die($url->uri());
+        header("Location: ".$url->uri());
+        
+    }
+    //認証失敗
+    else{
+        $cer_flg++;
+    }
+    
+}
+//アカウント新規登録
+else if($_REQUEST['tool']=='system' && $_REQUEST['mode']=='regist'){
+    if($_REQUEST['action']=='add'){
+        
+    }
+    else{
+        $tpl  = new TEMPLATE();
+        echo $tpl->read_tpl('tool/system/tpl/regist.html');
+    }
+}
+//認証後
+else if (isset($_SESSION['id']) && $_SESSION['id'] && $_COOKIE['PHPSESSID']) {
+    
+    //die("sessid:".$C_OOKIE['PHPSESSID']);
+    
+    //認証成功
+    if($sys_common->login($_REQUEST['id'],$_REQUEST['pw'])){
+        $tpl  = new TEMPLATE();
+        echo $tpl->read_tpl('tool/system/tpl/index.html');
+    }
+    //認証失敗
+    else{
+        $cer_flg++;
+    }
+}
+//ログイン前
+else {
+    $cer_flg++;
+}
+
+//認証失敗の場合はログインページへ
+if($cer_flg){
+    $tpl  = new TEMPLATE();
+    echo $tpl->read_tpl('tool/system/tpl/login.html');
+}
+
+//$_SESSION[***](値保存できる）
+
+//echo $_SESSION['count']."/".$_SESSION['id'];
+
+exit();
+
+class SYS_COMMON{
+    //Directory require
+    function requires($dir="tool/system/php/"){
+        if(!is_dir($dir)){return;}
+        
+        if(!preg_match("@\/$@",$dir)){
+            $dir.= '/';
+        }
+        
+        $php = scandir($dir);
+        for($i=0,$c=count($php);$i<$c;$i++){
+            
+            //システムファイルは無視
+            if($php[$i]=='.' || $php[$i]=='..'){continue;}
+            
+            //phpファイル以外は無視
+            if(!preg_match("/^(.*)\.php$/",$php[$i])){continue;}
+            
+            require_once $dir.$php[$i];
+        }
+    }
+    //Login-check
+    function login($id,$pw){
+        if($id=='' || $pw==''){return;}
+        
+        //DB検索
+        
+        
+        //セッションデータ保持
+        $_SESSION['id'] = $id;
+        
+        //認証成功
+        return true;
+    }
+    //Logout
+    function logout(){
+        
+    }
+    //Load-config
+    function loadConfig($tool='system'){
+        
+        $file = "tool/".$tool."/cfg/"."database.dat";
+        
+        unset($data);
+        
+        //database
+        if(file_exists($file)){
+            $datas = explode("\n",file_get_contents($file));
+            for($i=0,$c=count($datas);$i<$c;$i++){
+                if(!$datas[$i]){continue;}
+                $sp = explode(",",$datas[$i]);
+                $data['cfg'][$sp[0]] = $sp[1];
+            }
+        }
+        
+        return $data;
+    }
+    
+}
+
 
 //基本クラス読み込み※メインモジュール内に格納
 $ideacompo = new IDEACOMPO();
@@ -60,30 +149,23 @@ $ideacompo = new IDEACOMPO();
 //初期設定
 $ideacompo->set();
 
-// choice only tool
+//choice only tool
 $ideacompo->choice_tool();
 
 //Library読み込み
 $ideacompo->requires(SYS."php/");
 
-//デフォルト値セット
-//$GLOBALS[config][menu_default] = 'index';
-
 //configデータ読み込み※$GLOBALSに代入
-//$ideacompo->config(SYS.'cfg/config.txt');
-if($_REQUEST[tool]){
-    $GLOBALS[config] = $ideacompo->config(TOOL.$_REQUEST[tool].'/cfg/config.txt');
+if($_REQUEST['tool']){
+    $GLOBALS['config'] = $ideacompo->config(TOOL.$_REQUEST[tool].'/cfg/config.txt');
 }
 else{
-    $GLOBALS[config] = $ideacompo->config(SYS.'cfg/config.txt');
+    $GLOBALS['config'] = $ideacompo->config(SYS.'cfg/config.txt');
 }
 
 //認証[ login / logout ]
 $uid = $ideacompo->check();
 define(UID,$uid);
-//die($uid);
-
-
 
 //共通ライブラリ読み込み
 $tpl   = new TEMPLATE();

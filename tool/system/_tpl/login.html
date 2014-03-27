@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+	
+	<!--%tpl:tool/system/tpl/parts/tag_head.html%-->
+	
+	<body>
+		
+		<!-- Header-Menu -->
+		<!--%tpl:tool/system/tpl/parts/menu.html%-->
+		
+		<div class='container' style='margin-top:60px;'>
+			
+			<div><!--%globals:msg:val%--></div>
+			
+			<form name='form1' method='post'>
+				<input type='hidden' name='mode' value='login' />
+				<input type='text' name='id' />
+				<input type='password' name='pw' />
+				<input type='submit' value='login' />
+			</form>
+			<div style='text-align:center;'>
+				<a href='?mode=regist'>新規ユーザー登録</a>
+			</div>
+		</div>
+		
+		<!--%tpl:tool/system/tpl/parts/default_footer.html%-->
+		
+	</body>
+</html>
