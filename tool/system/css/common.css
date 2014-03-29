@@ -1,20 +1,106 @@
 
-/*@media screen and (max-width: 480px){}*/
+/*login*/
 
-/* pc */
-@import url('pc/index.css')  screen and (min-width: 769px);
-@import url('pc/logo.css')   screen and (min-width: 769px);
-@import url('pc/header.css') screen and (min-width: 769px);
-@import url('pc/footer.css') screen and (min-width: 769px);
+.contents{
+	width:300px;
+	margin:8px auto;
+	background-color:#F6F6F6;
+	padding:8px 20px;
+	border-radius:8px;
+	text-align:center;
+}
 
-@import url('tablet/index.css')  screen and (min-width: 481px) and (max-width: 768px);
-@import url('tablet/logo.css')   screen and (min-width: 481px) and (max-width: 768px);
-@import url('tablet/header.css') screen and (min-width: 481px) and (max-width: 768px);
-@import url('tablet/footer.css') screen and (min-width: 481px) and (max-width: 768px);
+.contents_title{
+	line-height:32px;
+	text-align:center;
+}
+.contents_title *{
+	vertical-align:middle;
+}
 
-@import url('smartphone/index.css')  screen and (max-width: 480px);
-@import url('smartphone/logo.css')   screen and (max-width: 480px);
-@import url('smartphone/header.css') screen and (max-width: 480px);
-@import url('smartphone/footer.css') screen and (max-width: 480px);
+.message{
+	color:red;
+	text-align:left;
+}
+.message:empty{
+	display:none;
+}
+.login_keep{
+	width:100%;
+	display:inline-block;
+	font-weight:normal;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	color:#888;
+}
+.button_regist{
+	margin:20px 0;
+	text-align:center;
+}
+.button_regist img{
+	margin:0 4px;
+}
 
-/*@import url('regist.css');*/
+.input_area{
+	width:240px;
+	display:inline-block;
+	text-align:left;
+}
+.input_area input[type="text"],.input_area input[type="password"]{
+	width:100%;
+	height:40px;
+	margin:8px 0;
+	padding:8px;
+	font-size:20px;
+}
+.input_area input[type="submit"]{
+	width:100%;
+	height:40px;
+	display:inline-block;
+	right:0;
+	font-size:16px;
+}
+
+/*sns-login-button*/
+.login_sns{
+	width:100%;
+	margin:8px 0;
+	text-align:center;
+}
+.login_sns img{
+	display:inline-block;
+	width:32px;
+	margin:0 4px;
+	/*margin:8px;*/
+}
+
+.openid_link{
+	display:inline-block;
+	width:200px;
+	height:40px;
+	line-height:40px;
+	border-radius:4px;
+	/*padding:4px;*/
+	border:1px solid #888;
+	background-color:#CCC;
+	text-align:left;
+	vertical-align:middle;
+}
+
+div.input_line{
+	height:50px;
+	/*line-height:50px;*/
+	font-size:16px;
+}
+
+/*menu*/
+
+.navbar-brand img{
+	vertical-align:middle;
+	margin:0 4px;
+}
+
+
+
+

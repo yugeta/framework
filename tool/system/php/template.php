@@ -69,12 +69,12 @@ class TEMPLATE{
 				else if($key=="system"){
 					$tpl = $this->check_system($tpl,$key,$val,$sp);
 				}
-                else if($key=="globals"){
-                    $tpl = $this->check_globals($tpl,$data[0],$data[1],$sp);
+				else if($key=="globals"){
+					$tpl = $this->check_globals($tpl,$data[0],$data[1],$sp);
 				}
-                else if($key=="if"){//die(join(":",$data));
-                    $tpl = $this->check_if($tpl,$data,$sp);
-                }
+				else if($key=="if"){
+					$tpl = $this->check_if($tpl,$data,$sp);
+				}
 				else if($key=="class"){
 					//$val2 = join(":",array_splice($data ,2,count($data)));
 					//die($key."/".$data[1]."/".$val2);
@@ -152,17 +152,22 @@ class TEMPLATE{
     //data[2]：結果文字列(else)
     //※結果文字列内には「:」は使用できない。(&#58;)で使用する。
     function check_if($tpl,$data,$sp="%"){
+    	
+    	if($data[0]){$check = $data[0];}
+    	else{$check = 0;}
+    	
     	$val='';
         
-        if(eval("if($data[0]){return true;}else{return false;}")){
+        if(eval("if(".$check."){return true;}else{return false;}")){
             $val = $data[1];
         }
-        else{
+        else if($data[2]){
             $val = $data[2];
         }
         
-    	return str_replace("<!--".$sp."if:".join(':',$data).$sp."-->" , $val , $tpl);
+    	return str_replace("<!--".$sp."if:".join(":",$data).$sp."-->" , $val , $tpl);
 	}
+	
 	//class
 	function check_class($tpl,$key,$class,$val,$sp="%"){
 		

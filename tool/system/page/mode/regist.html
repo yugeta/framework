@@ -1,24 +1,26 @@
-<div class='container' style='margin-top:60px;'>
+<form name='form1' method='post'>
+	<input type='hidden' name='mode' value='regist' />
+	<input type='hidden' name='action' value='add' />
+	<input type='hidden' name='user_id_type' value='<!--%globals:config:user_id_type%-->' />
 	
-	<h3>アカウント登録</h3>
-	
-	<div><!--%globals:msg:val%--></div>
-	
-	<form name='form1' method='post'>
-		<input type='hidden' name='mode' value='regist' />
-		<input type='hidden' name='action' value='add' />
-		<input type='hidden' name='user_id_type' value='<!--%globals:config:user_id_type%-->' />
+	<div class='contents'>
 		
-		ユーザーID<br>
-		<input type='text' name='id' /><br>
-		パスワード<br>
-		<input type='password' name='pw' /><br>
-		名前<br>
-		<input type='text' name='nm' /><br>
-		メール<br>
-		<input type='text' name='ml' /><br>
-		<br>
-		<input type='submit' value='send' /><br>
+		<h3 class='contents_title'>
+			<img src='tool/system/img/cc_black/user_icon&32.png'>
+			アカウント登録
+		</h3>
 		
-	</form>
-</div>
+		<div class='message'><!--%globals:msg:val%--></div>
+		
+		<div class='input_area'>
+			<div class='input_line'><input type='text' name='id' placeholder='ID *'/></div>
+			<div class='input_line'><input type='text' name='pw' placeholder='Password *'/></div>
+			<div class='input_line'><input type='text' name='nm' placeholder='Name'/></div>
+			<div class='input_line'><input type='text' name='mail' placeholder='eMail'/></div>
+			
+			<div class='input_line'><input type='submit' value='Regist' /></div>
+		</div>
+		
+	</div>
+	
+</form>

@@ -1,0 +1,154 @@
+// MKEditor for Windows Project
+// Version 3.8
+// ProjectFile: C:\httpd142p\test2\openid_sample\_OPENID_SAMPLE.mkp
+
+/* ProjectItem */
+Type=ntBox
+Level=0
+Name=OPENID_SAMPLE
+Lock=0
+Comment=
+Ext=
+begin/*
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=1
+Name=readme.txt
+Lock=0
+Comment=
+Ext=
+begin/*
+readme.txt
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=1
+Name=common.php
+Lock=0
+Comment=
+Ext=
+begin/*
+common.php
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=1
+Name=index.php
+Lock=0
+Comment=
+Ext=
+begin/*
+index.php
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=1
+Name=login_view.php
+Lock=0
+Comment=
+Ext=
+begin/*
+login_view.php
+*/end
+
+/* ProjectItem */
+Type=ntFolder
+Level=1
+Name=login
+Lock=0
+Comment=
+Ext=
+begin/*
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=2
+Name=login.php
+Lock=0
+Comment=
+Ext=
+begin/*
+login.php
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=2
+Name=login_control.php
+Lock=0
+Comment=
+Ext=
+begin/*
+login_control.php
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=2
+Name=login_view_message.pjp
+Lock=0
+Comment=
+Ext=
+begin/*
+login_view_message.php
+*/end
+
+/* ProjectItem */
+Type=ntFolder
+Level=1
+Name=return
+Lock=0
+Comment=
+Ext=
+begin/*
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=2
+Name=return.php
+Lock=0
+Comment=
+Ext=
+begin/*
+return.php
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=2
+Name=return_control.php
+Lock=0
+Comment=
+Ext=
+begin/*
+return_control.php
+*/end
+
+/* ProjectItem */
+Type=ntRelLink
+Level=2
+Name=return_view.php
+Lock=0
+Comment=
+Ext=
+begin/*
+return_view.php
+*/end
+
+/* ProjectItem */
+Type=ntTrash
+Level=0
+Name=ÉSÉ~î†
+Lock=0
+Comment=
+Ext=
+begin/*
+*/end
+

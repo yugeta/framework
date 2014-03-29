@@ -1,29 +1,44 @@
-<!doctype html>
-<html lang="en">
+<form name='form1' method='post'>
+	<input type='hidden' name='mode' value='login' />
 	
-	<!--%tpl:tool/system/tpl/parts/tag_head.html%-->
-	
-	<body>
+	<div class='contents'>
 		
-		<!-- Header-Menu -->
-		<!--%tpl:tool/system/tpl/parts/menu.html%-->
+		<h3 class='contents_title'>
+			<img src='tool/system/img/cc_black/padlock_closed_icon&32.png'>
+			LOGIN
+		</h3>
 		
-		<div class='container' style='margin-top:60px;'>
-			
-			<div><!--%globals:msg:val%--></div>
-			
-			<form name='form1' method='post'>
-				<input type='hidden' name='mode' value='login' />
-				<input type='text' name='id' />
-				<input type='password' name='pw' />
-				<input type='submit' value='login' />
-			</form>
-			<div style='text-align:center;'>
-				<a href='?mode=regist'>新規ユーザー登録</a>
-			</div>
+		<div class='message'><!--%globals:msg:val%--></div>
+		
+		<div class='input_area'>
+			<input type='text' name='id' placeholder='ID'/><br>
+			<input type='password' name='pw' placeholder='Password'/><br>
+			<label class='login_keep'>
+				<input type='checkbox' name='cookie_time' value='86400'> ※ログインしたままにする
+			</label><br>
+			<input type='submit' value='login' />
 		</div>
 		
-		<!--%tpl:tool/system/tpl/parts/default_footer.html%-->
+		<div style='height:32px;'></div>
+		<div class='login_sns'>
+			
+			<!--gmail-->
+			<a class='openid_link' href='?mode=openid&service=gmail'><img src='tool/system/img/sns/social_google_box.png'> Sin in with Gmail</a>
+			
+			<!--facebook-->
+			<!--<a href='?mode=openid&service=facebook'><img src='tool/system/img/sns/social_facebook_box_blue.png'></a>-->
+			
+			<!--twitter-->
+			<!--<a href='?mode=openid&service=twitter'><img src='tool/system/img/sns/social_twitter_box_blue.png'></a>-->
+			
+			<!--mixi-->
+			<!--<a href='?mode=openid&service=mixi'><img src='http://mixi.co.jp/sitemap/images/logo_pc.png'></a>-->
+			
+		</div>
 		
-	</body>
-</html>
+		<div class='button_regist'>
+			<a href='?mode=regist'><img src='tool/system/img/cc_black/user_icon&24.png'>新規ユーザー登録</a>
+		</div>
+	</div>
+	
+</form>

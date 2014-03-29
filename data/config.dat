@@ -1,6 +1,0 @@
-
-#データベースタイプ [ file , mysql , mongodb , couchdb ]
-database_type,file
-
-#
-default_tool,db
