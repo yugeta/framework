@@ -1,0 +1,38 @@
+<form name='form1' method='post'>
+	<input type='hidden' name='mode' value='system_setting' />
+	<input type='hidden' name='action' value='write' />
+	
+	<div class='contents'>
+		
+		<h3 class='contents_title'>
+			<img src='tool/system/img/cc_black/cogs_icon&32.png'>
+			System Setting
+		</h3>
+		
+		<div class='input_area'>
+			
+			<div>#データベースタイプ<br>
+				[ file , mysql , mongodb , couchdb ]</div>
+			<div class='input_line'>
+				<select class='setting' name='database_type'>
+					<option value='file'>file</option>
+					<option value='mysql'>mysql</option>
+					<option value='mongodb'>mongodb</option>
+				</select>
+			</div>
+			
+			<div>#ログイン後のデフォルトTOOL<br>
+				（プラグインID）[ null:system ]</div>
+			<div class='input_line'>
+				<select class='setting' name='default_tool'>
+					<option value=''></option>
+					<option value='db'>db</option>
+				</select>
+			</div>
+			
+			<div class='input_line'><input type='submit' value='Update' /></div>
+		</div>
+		
+	</div>
+	
+</form>

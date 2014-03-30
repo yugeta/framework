@@ -126,7 +126,7 @@ else if($system_flg && $_REQUEST['mode']=='openid' && $_REQUEST['service']){
     
     //認証サイトからの返信
     if($_REQUEST['action']){
-        //認証成功
+        //認証成功（管理専用※返答値確認）
         if($_REQUEST['session_id'] == session_id() && $_REQUEST['check']){
             $keys = array_keys($_REQUEST);
             $a="";
@@ -138,6 +138,7 @@ else if($system_flg && $_REQUEST['mode']=='openid' && $_REQUEST['service']){
             echo $tpl->read_tpl("tool/system/page/index.html");
             exit();
         }
+        //認証成功->ログイン
         else if($_REQUEST['session_id'] == session_id()){
             
             //openidのIDを取得
@@ -152,6 +153,12 @@ else if($system_flg && $_REQUEST['mode']=='openid' && $_REQUEST['service']){
             }
             //セッション情報の登録
             $_SESSION['id'] = $id;
+            
+            //cookie-time処理
+            if($_REQUEST['cookie_time']){
+                $CookieInfo = session_get_cookie_params();
+                setcookie( session_name(), session_id(), time() + $_REQUEST['cookie_time'] , $CookieInfo['path'] );
+            }
             
             //リダイレクト処理
             header("Location: ".$url->url());
@@ -269,9 +276,9 @@ class SYS_COMMON{
         //クッキー時間の書き換え
         //die($_COOKIE['PHPSESSID']);
         //setcookie( session_name(), session_id(), time() + 600 );
-        $CookieInfo = session_get_cookie_params();
         //die(session_name()." : ".session_id()." : ".$CookieInfo['path']);
         if($_REQUEST['cookie_time']){
+            $CookieInfo = session_get_cookie_params();
             setcookie( session_name(), session_id(), time() + $_REQUEST['cookie_time'] , $CookieInfo['path'] );
         }
         

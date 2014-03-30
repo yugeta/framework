@@ -19,7 +19,7 @@ class OPENID{
             'openid.ns.max_auth_age'=> '300',
             'openid.claimed_id'     => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.identity'       => 'http://specs.openid.net/auth/2.0/identifier_select',
-            'openid.return_to'      => $mysite.'?mode=openid&service=gmail&action=return&session_id='.$session_id."&check=".$_REQUEST['check'],
+            'openid.return_to'      => $mysite.'?mode=openid&service=gmail&action=return&session_id='.$session_id."&check=".$_REQUEST['check']."&cookie_time=".$_REQUEST['cookie_time'],
             'openid.realm'          => $mysite,
             'openid.mode'           => 'checkid_setup',
             'openid.ui.ns'          => 'http://specs.openid.net/extensions/ui/1.0',
