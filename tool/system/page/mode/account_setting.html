@@ -2,7 +2,7 @@
 	<input type='hidden' name='mode' value='regist' />
 	<input type='hidden' name='action' value='update' />
 	<input type='hidden' name='user_id_type' value='<!--%globals:config:user_id_type%-->' />
-	<input type='hidden' name='service' value='<!--%class:SYS_COMMON:readAccount("service")%-->' />
+	<input type='hidden' name='service' value='<!--%class:Account:getAccountInfo("service")%-->' />
 	
 	<div class='contents'>
 		
@@ -14,10 +14,10 @@
 		<div class='message'><!--%globals:msg:val%--></div>
 		
 		<div class='input_area'>
-			<div class='input_line'><input type='text' name='id' value='<!--%class:SYS_COMMON:readAccount("id")%-->' placeholder='ID' readonly/></div>
-			<div class='input_line'><input type='password' name='pw' value='<!--%class:SYS_COMMON:readAccount("pw")%-->' placeholder='Password'/><br>※パスワードを変更する</div>
-			<div class='input_line'><input type='text' name='nm' value='<!--%class:SYS_COMMON:readAccount("nm")%-->' placeholder='Name'/></div>
-			<div class='input_line'><input type='text' name='mail' value='<!--%class:SYS_COMMON:readAccount("mail")%-->' placeholder='eMail'/></div>
+			<div class='input_line'><input type='text' name='id' value='<!--%class:ACCOUNT:getAccountInfo("id")%-->' placeholder='ID' readonly/></div>
+			<div class='input_line'><input type='password' name='pw' value='<!--%class:ACCOUNT:getAccountInfo("pw")%-->' placeholder='Password'/><br>※パスワードを変更する</div>
+			<div class='input_line'><input type='text' name='nm' value='<!--%class:ACCOUNT:getAccountInfo("nm")%-->' placeholder='Name'/></div>
+			<div class='input_line'><input type='text' name='mail' value='<!--%class:ACCOUNT:getAccountInfo("mail")%-->' placeholder='eMail'/></div>
 			
 			<div class='input_line'><input type='submit' value='Update' /></div>
 		</div>

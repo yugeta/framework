@@ -19,7 +19,7 @@ class OPENID{
             'openid.ns.max_auth_age'=> '300',
             'openid.claimed_id'     => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.identity'       => 'http://specs.openid.net/auth/2.0/identifier_select',
-            'openid.return_to'      => $mysite.'?mode=openid&service=gmail&action=return&session_id='.$session_id,
+            'openid.return_to'      => $mysite.'?mode=openid&service=gmail&action=return&session_id='.$session_id."&check=".$_REQUEST['check'],
             'openid.realm'          => $mysite,
             'openid.mode'           => 'checkid_setup',
             'openid.ui.ns'          => 'http://specs.openid.net/extensions/ui/1.0',
@@ -97,6 +97,9 @@ class OPENID{
             if($mode=="id"){
                 return $_REQUEST['openid_ext1_value_email'];
             }
+            else if($mode=="mail"){
+                return $_REQUEST['openid_ext1_value_email'];
+            }
             else if($mode=='language'){
                 return $_REQUEST['openid_ext1_value_language'];
             }
@@ -112,6 +115,9 @@ class OPENID{
         }
         else if($service=='facebook'){
             if($mode=="id"){
+                
+            }
+            else if($mode=='mail'){
                 
             }
             else if($mode=='language'){
@@ -131,6 +137,9 @@ class OPENID{
             if($mode=="id"){
                 
             }
+            else if($mode=='mail'){
+                
+            }
             else if($mode=='language'){
                 
             }
@@ -146,6 +155,9 @@ class OPENID{
         }
         else if($service=='mixi'){
             if($mode=="id"){
+                
+            }
+            else if($mode=='mail'){
                 
             }
             else if($mode=='language'){

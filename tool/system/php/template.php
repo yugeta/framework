@@ -71,6 +71,14 @@ class TEMPLATE{
 				}
 				else if($key=="globals"){
 					$tpl = $this->check_globals($tpl,$data[0],$data[1],$sp);
+					/*
+					try{
+						$tpl = $this->check_globals($tpl,$data[0],$data[1],$sp);
+					}
+					catch(Exception $e){
+						die($e->getMessage());
+					}
+					*/
 				}
 				else if($key=="if"){
 					$tpl = $this->check_if($tpl,$data,$sp);
@@ -140,32 +148,51 @@ class TEMPLATE{
 		}
 		
 	}
-    //GLOBALS
-    function check_globals($tpl,$key1,$key2,$sp="%"){
+	//GLOBALS
+	function check_globals($tpl,$key1,$key2,$sp="%"){//die($key1."/".$key2."/".isset($GLOBALS[$key1][$key2])."/".$GLOBALS[$key1][$key2]);
 		
-		return str_replace("<!--".$sp."globals:".$key1.":".$key2.$sp."-->" , $GLOBALS[$key1][$key2] , $tpl);
+		//echo $key1."/".$key2."/".isset($GLOBALS[$key1])."/".isset($GLOBALS[$key1][$key2])."<br>\n";
+		
+		if(!isset($GLOBALS[$key1])){$val="";}
+		else if(isset($GLOBALS[$key1][$key2])){$val = $GLOBALS[$key1][$key2];}
+		else{$val="";}
+		/*
+		try{
+			$val = $GLOBALS[$key1][$key2];
+		}
+		catch(Exception $e){
+			die($key1."/".$key2."/".$e->getMessage());
+			//die($key1."/".$key2."/".isset($GLOBALS[$key1][$key2])."/".$GLOBALS[$key1][$key2]);
+		}
+		//die(isset($GLOBALS[$key1])."/".$GLOBALS[$key1][$key2]);
+		*/
+		
+		return str_replace("<!--".$sp."globals:".$key1.":".$key2.$sp."-->" , $val , $tpl);
 		
 	}
-    //if
-    //data[0]：条件文
-    //data[1]：結果文字列
-    //data[2]：結果文字列(else)
-    //※結果文字列内には「:」は使用できない。(&#58;)で使用する。
-    function check_if($tpl,$data,$sp="%"){
-    	
-    	if($data[0]){$check = $data[0];}
-    	else{$check = 0;}
-    	
-    	$val='';
-        
-        if(eval("if(".$check."){return true;}else{return false;}")){
-            $val = $data[1];
-        }
-        else if($data[2]){
-            $val = $data[2];
-        }
-        
-    	return str_replace("<!--".$sp."if:".join(":",$data).$sp."-->" , $val , $tpl);
+	//if
+	//data[0]：条件文
+	//data[1]：結果文字列
+	//data[2]：結果文字列(else)
+	//※結果文字列内には「:」は使用できない。(&#58;)で使用する。
+	function check_if($tpl,$data,$sp="%"){
+		
+		
+		if($data[0]!=""){$check = $data[0];}
+		else{$check = 0;}
+		
+		//die($check);
+		
+		$val='';
+		
+		if(eval("if(".$check."){return true;}else{return false;}")){
+			$val = $data[1];
+		}
+		else if($data[2]){
+			$val = $data[2];
+		}
+		
+		return str_replace("<!--".$sp."if:".join(":",$data).$sp."-->" , $val , $tpl);
 	}
 	
 	//class
