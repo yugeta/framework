@@ -1,0 +1,8 @@
+
+#データベースタイプ [ file , mysql , mongodb , couchdb ]
+database_type,file
+
+#ログイン後のデフォルトTOOL（プラグインID）[ null:system ]
+default_tool,db
+
+

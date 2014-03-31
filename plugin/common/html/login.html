@@ -1,0 +1,50 @@
+<form name='form1' method='post'>
+	<input type='hidden' name='m' value='login' />
+	
+	<div class='contents'>
+		
+		<h3 class='contents_title'>
+			<img src='<!--%globals:data:common:plugin_dir%-->/common/img/cc_black/padlock_closed_icon&32.png'>
+			LOGIN
+		</h3>
+		
+		<div class='message'><!--%globals:data:common:message%--></div>
+		
+		<div class='input_area'>
+			<input type='text' name='id' placeholder='ID'/><br>
+			<input type='password' name='pw' placeholder='Password'/><br>
+			<label class='login_keep'>
+				<input type='checkbox' name='cookie_time' value='86400'> ※ログインしたままにする
+			</label><br>
+			<input type='submit' value='login' />
+		</div>
+		
+		<div style='height:32px;'></div>
+		<div class='login_sns'>
+			
+			<!--gmail-->
+			<a class='openid_link' href='?m=openid&service=gmail' onclick='if(document.form1.cookie_time.checked==true){this.href+="&cookie_time="+document.form1.cookie_time.value}'><img src='<!--%globals:data:common:plugin_dir%-->/common/img/sns/social_google_box.png'> Sin in with Gmail</a>
+			
+			<!--facebook-->
+			<!--<a href='?m=openid&service=facebook'><img src='tool/system/img/sns/social_facebook_box_blue.png'></a>-->
+			
+			<!--twitter-->
+			<!--<a href='?m=openid&service=twitter'><img src='tool/system/img/sns/social_twitter_box_blue.png'></a>-->
+			
+			<!--mixi-->
+			<!--<a href='?m=openid&service=mixi'><img src='http://mixi.co.jp/sitemap/images/logo_pc.png'></a>-->
+			
+		</div>
+		
+		<div class='login_sns' style='display:none;'>
+			Check<br>
+			
+			<a class='openid_link' href='?m=openid&service=gmail&check=true'><img src='<!--%globals:data:common:plugin_dir%-->/common/img/sns/social_google_box.png'> Sin in with Gmail</a>
+		</div>
+		
+		<div class='button_regist'>
+			<a href='?m=regist'><img src='<!--%globals:data:common:plugin_dir%-->/common/img/cc_black/user_icon&24.png'>新規ユーザー登録</a>
+		</div>
+	</div>
+	
+</form>
