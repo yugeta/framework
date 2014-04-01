@@ -2,6 +2,8 @@
 
 class LOGIN{
 	
+	public $user_file = "data/common/users.dat";
+	
 	//authorize [return : boolean]
 	function auth($mode=""){
 		
@@ -18,21 +20,6 @@ class LOGIN{
 		else if($mode=='regist'){
 			$account = new ACCOUNT();
 			$account->new_regist($_REQUEST['action'],"",$_REQUEST['data']);
-			/*
-			if($_REQUEST['action']=='add'){
-				$account = new ACCOUNT();
-				$flg = $account->setAccount("0","","",$_REQUEST['data']['id'],$_REQUEST['data']['pw'],$_REQUEST['data']['nm'],$_REQUEST['data']['mail']);
-				if($flg){
-					$_REQUEST['m'] = "regist_complete";
-				}
-				else{
-					$_REQUEST['m'] = "regist";
-				}
-			}
-			else{
-				$_REQUEST['m'] = "regist";
-			}
-			*/
 		}
 		//Open-ID認証
 		else if($mode=='openid'){
@@ -56,7 +43,7 @@ class LOGIN{
 	function setLogin($id="",$pw=""){
 			//未入力
 		if(!$id && !$pw){
-			$GLOBALS['data']['common']['message'] = "アカウントIDとパスワードを入力してください。";
+			$GLOBALS['view']['message'] = "アカウントIDとパスワードを入力してください。";
 		}
 		
 		//認証成功※open-idは無し
@@ -76,7 +63,7 @@ class LOGIN{
 		
 		//認証失敗
 		else{
-			$GLOBALS['data']['common']['message'] = "アカウントIDまたはパスワードが違います。";
+			$GLOBALS['view']['message'] = "アカウントIDまたはパスワードが違います。";
 		}
 		
 		$_REQUEST['m']='login';
@@ -104,15 +91,15 @@ class LOGIN{
 		//-----
 		
 		//mysql
-		if($GLOBALS['system']['config']['database_type']=='mysql'){
+		if($GLOBALS['sys']['config']['database_type']=='mysql'){
 			if(!$this->login_check_mysql($service,$id,$pw)){return;}
 		}
 		//mongodb
-		else if($GLOBALS['system']['config']['database_type']=='mongodb'){
+		else if($GLOBALS['sys']['config']['database_type']=='mongodb'){
 			if(!$this->login_check_mongodb($service,$id,$pw)){return;}
 		}
 		//couched
-		else if($GLOBALS['system']['config']['database_type']=='couchdb'){
+		else if($GLOBALS['sys']['config']['database_type']=='couchdb'){
 			if(!$this->login_check_couchdb($service,$id,$pw)){return;}
 		}
 		//file
@@ -148,7 +135,8 @@ class LOGIN{
 	}
 	function login_check_file($service,$id,$pw){
 		
-		$file = "data/common/users.dat";
+		$file = $this->user_file;
+		//$file = "data/common/users.dat";
 		
 		if(!file_exists($file)){return;}
 		

@@ -13,6 +13,14 @@
 $GLOBALS['data']['common']['version']='0.003';
 $GLOBALS['data']['common']['plugin_dir']='plugin';
 
+$GLOBALS['sys']['version'] = '0.010';//このFWの基本バージョン
+$GLOBALS['sys']['plugin']  = 'plugin';//Plugin-Directory
+$GLOBALS['sys']['common']  = 'common';//Default-mode
+
+$GLOBALS['view']['message']  = '';//画面表示用メッセージ（システム利用分）
+$GLOBALS['view']['contents'] = '';//コンテンツ箇所の内部HTML
+
+
 $_REQUEST['p'] = ($_REQUEST['p'])?$_REQUEST['p']:"common";
 
 /*----------
@@ -29,7 +37,7 @@ class system_common{
 	//Load-config
 	function loadConfig($plugin='common'){
 		
-		$file = $GLOBALS['data']['common']['plugin_dir']."/".$plugin."/config.dat";
+		$file = $GLOBALS['sys']['plugin']."/".$plugin."/config.dat";
 		
 		unset($data);
 		
@@ -60,7 +68,7 @@ class system_common{
 	function requires($plugin="common"){
 		
 		//対象plugin内のphpフォルダを取得
-		$dir = $GLOBALS['data']['common']['plugin_dir']."/".$plugin."/php/";
+		$dir = $GLOBALS['sys']['plugin']."/".$plugin."/php/";
 		
 		//フォルダが存在しない場合は処理しない
 		if(!is_dir($dir)){return;}
@@ -90,7 +98,7 @@ class system_common{
 //初期設定----------
 
 //Load-config
-$GLOBALS['data']['common']['config'] = $common->loadConfig();
+$GLOBALS['sys']['config'] = $common->loadConfig();
 
 //認証処理
 session_start();
@@ -114,7 +122,7 @@ $login->auth($_REQUEST['m']);
 $p = ($_REQUEST['p'])?$_REQUEST['p']:"common";
 $m = ($_REQUEST['m'])?$_REQUEST['m']:"index";
 $f = ($_REQUEST['f'])?$_REQUEST['f']:"common";
-$dir = $GLOBALS['data']['common']['plugin_dir']."/".$p."/html/";
+$dir = $GLOBALS['sys']['plugin']."/".$p."/html/";
 
 //$view = new view();
 //$view->html($p,$m);
@@ -123,7 +131,7 @@ $template = new template($dir.$m.".html");
 
 //die($dir.$f.".html:".$dir.$m.".html:".$GLOBAL['data']['common']['message']);
 //コンテンツ
-$GLOBALS['data']['html'] = $template->file2HTML($dir.$m.".html");
+$GLOBALS['view']['html'] = $template->file2HTML($dir.$m.".html");
 //die($GLOBALS['data']['html']);
 //die($dir.$f.".html"."/".$GLOBALS['data']['html']);
 //die($GLOBAL['data']['common']['message']);

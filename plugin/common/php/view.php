@@ -9,10 +9,10 @@ class VIEW{
 		//$file_mode = 'plugin/'.$plugin.'/html/common.html';
 		
 		if($file){
-			$file = $GLOBALS['data']['common']['plugin_dir']."/".$plugin."/html/".$file;
+			$file = $GLOBALS['sys']['plugin']."/".$plugin."/html/".$file;
 			
 			if(file_exists($file)){
-				$GLOBALS['data']['html'] = $template->file2HTML($file);
+				$GLOBALS['view']['html'] = $template->file2HTML($file);
 			}
 		}
 		else{

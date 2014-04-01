@@ -3,7 +3,7 @@
 class ACCOUNT{
 	
 	//対象ファイル
-	var $user_file = "data/system/users.dat";
+	var $user_file = "data/common/users.dat";
 	
 	//新規登録
 	function new_regist($mode,$service,$data){
@@ -14,27 +14,28 @@ class ACCOUNT{
 		if($mode=='add'){
 			
 			//登録済み確認（登録されていればtrueがかえる）
-			if($this->checkAccountID("",$id)){
-				$GLOBALS['data']['common']['message'] = "「".$id."」は登録済みのアカウントです。";
+			if($this->checkAccountID("",$data['id'])){
+				$GLOBALS['view']['message'] = "「".$data['id']."」は登録済みのアカウントです。";
+				$_REQUEST['m'] = "regist";
 			}
 			//情報不足（登録が完了した場合にtrueがかえる）
 			else if(!$this->setAccount(array("0",$service,"",$data['id'],$data['pw'],$data['nm'],$data['mail']))){
-				$GLOBALS['data']['common']['message'] = "入力情報が不足しています。";
+				$GLOBALS['view']['message'] = "入力情報が不足しています。";
+				$_REQUEST['m'] = "regist";
 			}
 			//登録成功
 			else{
-				header("Location: ".$url->getUrl());
+				//header("Location: ".$url->getUrl());
+				$GLOBALS['view']['message'] = "登録が完了しました。";
+				$_REQUEST['m'] = "regist";
 			}
-			
-			//アラートメッセージ表示
-			//$template->file2HTML($_REQUEST['tool'],$_REQUEST['page'] , "regist");
-			$_REQUEST['m'] = "regist";
 		}
 		//update
 		else if($mode=='update'){
 			$this->setAccount(array("0",$service,"",$data['id'],$data['pw'],$data['nm'],$data['mail']));
 			//header("Location: ".$url->url()."?tool=system&mode=account_setting_complete");
-			$_REQUEST['m'] = "regist_complete";
+			$GLOBALS['view']['message'] = "登録情報を更新しました。";
+			$_REQUEST['m'] = "account_setting";
 		}
 		//登録画面
 		else{

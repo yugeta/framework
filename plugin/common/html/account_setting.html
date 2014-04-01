@@ -1,0 +1,27 @@
+<form name='form1' method='post'>
+	<input type='hidden' name='m' value='regist' />
+	<input type='hidden' name='action' value='update' />
+	<input type='hidden' name='data[user_id_type]' value='<!--%globals:config:user_id_type%-->' />
+	<input type='hidden' name='data[service]' value='<!--%class:Account:getAccountInfo("service")%-->' />
+	
+	<div class='contents'>
+		
+		<h3 class='contents_title'>
+			<img src='<!--%globals:sys:plugin%-->/common/img/cc_black/user_icon&32.png'>
+			Account Setting
+		</h3>
+		
+		<div class='message'><!--%globals:view:message%--></div>
+		
+		<div class='input_area'>
+			<div class='input_line'><input type='text' name='data[id]' value='<!--%class:ACCOUNT:getAccountInfo("id")%-->' placeholder='ID' readonly/></div>
+			<div class='input_line'><input type='password' name='data[pw]' value='<!--%class:ACCOUNT:getAccountInfo("pw")%-->' placeholder='Password'/><br>※パスワードを変更する</div>
+			<div class='input_line'><input type='text' name='data[nm]' value='<!--%class:ACCOUNT:getAccountInfo("nm")%-->' placeholder='Name'/></div>
+			<div class='input_line'><input type='text' name='data[mail]' value='<!--%class:ACCOUNT:getAccountInfo("mail")%-->' placeholder='eMail'/></div>
+			
+			<div class='input_line'><input type='submit' value='Update' /></div>
+		</div>
+		
+	</div>
+	
+</form>
