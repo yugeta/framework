@@ -10,8 +10,8 @@
 /*----------
  * 初期設定
 ----------*/
-$GLOBALS['data']['common']['version']='0.003';
-$GLOBALS['data']['common']['plugin_dir']='plugin';
+//$GLOBALS['data']['common']['version']='0.003';
+//$GLOBALS['data']['common']['plugin_dir']='plugin';
 
 $GLOBALS['sys']['version'] = '0.010';//このFWの基本バージョン
 $GLOBALS['sys']['plugin']  = 'plugin';//Plugin-Directory
@@ -35,9 +35,9 @@ $common->requires();
 class system_common{
 	
 	//Load-config
-	function loadConfig($plugin='common'){
+	function loadConfig($p='common'){
 		
-		$file = $GLOBALS['sys']['plugin']."/".$plugin."/config.dat";
+		$file = "data/".$p."/config.dat";
 		
 		unset($data);
 		
@@ -58,7 +58,8 @@ class system_common{
 				
 				//分解
 				$sp = explode(",",$datas[$i]);
-				$data[$sp[0]] = str_replace("&#44;",",",$sp[1]);
+				$data[$sp[0]] = $sp[1];
+				//$data[$sp[0]] = str_replace("&#44;",",",$sp[1]);
 			}
 		}
 		return $data;

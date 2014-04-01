@@ -7,6 +7,10 @@ class LOGIN{
 	//authorize [return : boolean]
 	function auth($mode=""){
 		
+		$openid = new OPENID();
+		$account = new ACCOUNT();
+		$url = new URL();
+		
 		//ログイン処理
 		if($mode=='login'){
 			$this->setLogin($_REQUEST['id'],$_REQUEST['pw']);
@@ -18,15 +22,77 @@ class LOGIN{
 		}
 		//アカウント登録
 		else if($mode=='regist'){
-			$account = new ACCOUNT();
+			
 			$account->new_regist($_REQUEST['action'],"",$_REQUEST['data']);
 		}
 		//Open-ID認証
 		else if($mode=='openid'){
 			
+			//認証サイトからの返信
+			if($_REQUEST['action']){
+				//認証成功（管理専用※返答値確認）
+				if($_REQUEST['session_id'] == session_id() && $_REQUEST['check']){
+					$keys = array_keys($_REQUEST);
+					$a="";
+					for($i=0;$i<count($keys);$i++){
+						$a.= $keys[$i]." = ".$_REQUEST[$keys[$i]]."<br>\n";
+					}
+					$GLOBALS['contents']['html'] = $a;
+					//echo "OK<br>\n";
+					echo $tpl->read_tpl("tool/system/page/index.html");
+					exit();
+				}
+				//認証成功->ログイン
+				else if($_REQUEST['session_id'] == session_id()){
+					
+					//openidのIDを取得
+					$id   = $openid->getReturnData($_REQUEST['service'],"id");
+					$mail = $openid->getReturnData($_REQUEST['service'],"mail");
+					
+					//登録済みチェック
+					if(!$account->checkAccountID($_REQUEST['service'],$id,"")){
+						//未登録の場合（新規登録 id:アカウント pw:null openid:[google,facebook,twitter]）
+						//$sys_common->regist($_REQUEST['service'],$id,'','',$mail);
+						$account->setAccount(array("0",$_REQUEST['service'],"",$id,"","",$mail));
+					}
+					//セッション情報の登録
+					$_SESSION['id'] = $id;
+					
+					//cookie-time処理
+					if($_REQUEST['cookie_time']){
+						$CookieInfo = session_get_cookie_params();
+						setcookie( session_name(), session_id(), time() + $_REQUEST['cookie_time'] , $CookieInfo['path'] );
+					}
+					
+					//リダイレクト処理
+					header("Location: ".$url->getUrl());
+				}
+				//セッション未認証（期限切れ等）
+				else{
+					//リダイレクト処理
+					header("Location: ".$url->getUrl());
+				}
+			}
+			//認証サイトへ遷移
+			else{
+				//Google(Gmail)
+				if($_REQUEST['service']=="gmail"){
+					$openid->gmail(session_id());
+				}
+				else if($_REQUEST['service']=="facebook"){
+					$openid->facebook(session_id());
+				}
+			}
 		}
 		//認証済み
 		else if(isset($_SESSION['id']) && $_SESSION['id'] && $_COOKIE['PHPSESSID']){
+			
+			if(!$_REQUEST['p'] && $GLOBALS['sys']['config']['default_plugin']){
+				$_REQUEST['p'] = $GLOBALS['sys']['config']['default_plugin'];
+			}
+			
+			
+			
 			
 		}
 		//未認証（ログイン前）

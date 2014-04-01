@@ -42,5 +42,15 @@ class VIEW{
 		}
 	}
 	
+	function openid($service){
+		if(!$service){return;}
+		
+		$template = new template();
+		
+		if($GLOBALS['sys']['config'][$service]=="true"){
+			return $template->file2HTML($GLOBALS['sys']['plugin']."/common/html/".$service.".html");
+		}
+	}
+	
 	
 }

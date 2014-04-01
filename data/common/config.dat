@@ -1,8 +1,16 @@
 
-#データベースタイプ [ file , mysql , mongodb , couchdb ]
+#データベースタイプ [ file , mysql , mongodb , couchdb ]-----
 database_type,file
 
-#ログイン後のデフォルトTOOL（プラグインID）[ null:system ]
-default_tool,db
+#ログイン後のデフォルトTOOL（プラグインID）[ null:system ]-----
+default_plugin,db
+
+#OpenID連動[ true,false(blank) ]-----
+openid_google,true
+openid_facebook,false
+openid_twitter,false
+openid_mixi,false
+
+
 
 
