@@ -128,7 +128,8 @@ $dir = $GLOBALS['sys']['plugin']."/".$p."/html/";
 //$view = new view();
 //$view->html($p,$m);
 //フレーム表示
-$template = new template($dir.$m.".html");
+//$template = new template($dir.$m.".html");
+$template = new template();
 
 //die($dir.$f.".html:".$dir.$m.".html:".$GLOBAL['data']['common']['message']);
 //コンテンツ
