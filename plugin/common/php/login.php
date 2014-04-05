@@ -56,7 +56,7 @@ class LOGIN{
 					//openidのIDを取得
 					$id   = $openid->getReturnData($_REQUEST['service'],"id");
 					$mail = $openid->getReturnData($_REQUEST['service'],"mail");
-					die($_REQUEST['service']." / ".$id." / ".$mail);
+					//die($_REQUEST['service']." / ".$id." / ".$mail);
 					
 					//登録済みチェック
 					if(!$account->checkAccountID($_REQUEST['service'],$id,"")){
@@ -80,6 +80,8 @@ class LOGIN{
 			}
 			//認証サイトへ遷移
 			else{
+				$openid->services($_REQUEST['service'],session_id());
+				/*
 				//Google(Gmail)
 				if($_REQUEST['service']=="gmail"){
 					$openid->{$_REQUEST['service']}(session_id());
@@ -93,6 +95,7 @@ class LOGIN{
 				else if($_REQUEST['service']=="yahoo"){
 					$openid->yahoo(session_id());
 				}
+				*/
 			}
 		}
 		//認証済み

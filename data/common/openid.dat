@@ -1,7 +1,18 @@
 # 1:service 2:bool 3: 4:site-url 5:
 {
-	"google":["true","","https://www.google.com/accounts/o8/ud"],
-	"yahoo":["false","","https://login.yahoo.co.jp/config/login"],
-	"mixi":["true","https://mixi.jp/openid_server.pl"],
-	"twitter":["true"]
+	"gmail":{
+		"flg":"true",
+		"url":"https://www.google.com/accounts/o8/ud"
+	},
+	"yahoo":{
+		"flg":"false",
+		"url":"https://login.yahoo.co.jp/config/login"
+	},
+	"mixi":{
+		"flg":"true",
+		"url":"https://mixi.jp/openid_server.pl"
+	},
+	"twitter":{
+		"flg":"false"
+	}
 }

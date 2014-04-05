@@ -4,7 +4,8 @@
  * 
  * バージョン
  * - 0.010 : ログイン処理アルゴリズムの見直し
- * 
+ * - 0.020 : OpenIDにmixiを追加
+ * - 0.030 : 
 ====================*/
 
 /*----------
@@ -13,7 +14,7 @@
 //$GLOBALS['data']['common']['version']='0.003';
 //$GLOBALS['data']['common']['plugin_dir']='plugin';
 
-$GLOBALS['sys']['version'] = '0.010';//このFWの基本バージョン
+$GLOBALS['sys']['version'] = '0.020';//このFWの基本バージョン
 $GLOBALS['sys']['plugin']  = 'plugin';//Plugin-Directory
 $GLOBALS['sys']['common']  = 'common';//Default-mode
 

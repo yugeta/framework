@@ -5,11 +5,18 @@ class OPENID{
 	/*==========
 	サイト別認証処理
 	==========*/
+	function services($service=null,$session_id=null){//print_r($GLOBALS['sys']['openid']);die("test"."/".$GLOBALS['sys']['openid'][$service]['url']);
+		if(!$service || !$session_id){return;}
+		$this->specs($service,$GLOBALS['sys']['openid'][$service]['url'],$session_id,$_REQUEST['check'],$_REQUEST['cookie_time']);
+	}
+	/*
 	function gmail($session_id=null){
 		
 		if(!$session_id){return;}
 		
 		$this->specs("gmail","https://www.google.com/accounts/o8/ud",$session_id,$_REQUEST['check'],$_REQUEST['cookie_time']);
+		//
+		//$this->specs("gmail",$GLOBALS['sys']['openid'][$service]['url'],$session_id,$_REQUEST['check'],$_REQUEST['cookie_time']);
 		//$this->specs("gmail","https://www.google.com/accounts/o8/ud",$session_id,1,$_REQUEST['cookie_time']);
 	}
 	function yahoo($session_id=null){
@@ -27,7 +34,7 @@ class OPENID{
 		$this->specs("mixi","https://mixi.jp/openid_server.pl",$session_id,$_REQUEST['check'],$_REQUEST['cookie_time']);
 		//$this->specs("mixi","https://mixi.jp/openid_server.pl",$session_id,1,$_REQUEST['cookie_time']);
 	}
-	
+	*/
 	//open-idデフォルト
 	function specs($service,$openid_url,$session_id,$check,$cookie_time){
 		
@@ -77,6 +84,7 @@ class OPENID{
 		//サイトへ移動
 		header("Location: ".$openid_url.$separate_value.join("&",$q));
 	}
+	/*
 	//open-idデフォルト
 	function specs_20($service,$openid_url,$session_id,$check,$cookie_time){
 		
@@ -106,12 +114,6 @@ class OPENID{
 		);
 		
 		//key->get
-		/*
-		$keys = array_keys($data);
-		for($i=0,$c=count($keys);$i<$c;$i++){
-			$q[] = $keys[$i]."=".urlencode($data[$keys[$i]]);
-		}
-		*/
 		
 		foreach($data as $key=>$val){
 			$q[] = $key."=".urlencode($val);
@@ -126,7 +128,7 @@ class OPENID{
 		//サイトへ移動
 		header("Location: ".$openid_url.$separate_value.join("&",$q));
 	}
-	
+	*/
 	
 	//認証後に対象OPENID別に返り値を取得する。
 	function getReturnData($service,$mode){
@@ -215,6 +217,16 @@ class OPENID{
 		}
 	}
 	
+	//ボタン表示
+	function view_button($service){
+		if(!$service){return;}
+		
+		$template = new template();
+		
+		if($GLOBALS['sys']['openid'][$service]['flg']=="true"){//die($service);
+			return $template->file2HTML($GLOBALS['sys']['plugin']."/common/html/openid/".$service.".html");
+		}
+	}
 }
 
 
