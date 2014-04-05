@@ -2,7 +2,7 @@
 
 //URL関連処理
 
-class URL{
+class url{
     
     //port + domain [http://hoge.com:8800/]
     //現在のポートの取得（80 , 443 , その他）
