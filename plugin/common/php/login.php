@@ -30,24 +30,33 @@ class LOGIN{
 			
 			//認証サイトからの返信
 			if($_REQUEST['action']){
+				
+				//セッションID無し（期限切れ等）
+				if(!$_REQUEST['session_id'] || $_REQUEST['session_id'] != session_id()){
+					//リダイレクト処理
+					header("Location: ".$url->getUrl());
+				}
+				
 				//認証成功（管理専用※返答値確認）
-				if($_REQUEST['session_id'] == session_id() && $_REQUEST['check']){
+				if($_REQUEST['check']){
 					$keys = array_keys($_REQUEST);
 					$a="";
 					for($i=0;$i<count($keys);$i++){
 						$a.= $keys[$i]." = ".$_REQUEST[$keys[$i]]."<br>\n";
 					}
-					$GLOBALS['contents']['html'] = $a;
+					$GLOBALS['view']['html'] = "test:".$a;
 					//echo "OK<br>\n";
-					echo $tpl->read_tpl("tool/system/page/index.html");
+					$template = new template();
+					echo $template->file2HTML($GLOBALS['sys']['plugin']."/common/html/common.html");
 					exit();
 				}
 				//認証成功->ログイン
-				else if($_REQUEST['session_id'] == session_id()){
+				else{
 					
 					//openidのIDを取得
 					$id   = $openid->getReturnData($_REQUEST['service'],"id");
 					$mail = $openid->getReturnData($_REQUEST['service'],"mail");
+					die($_REQUEST['service']." / ".$id." / ".$mail);
 					
 					//登録済みチェック
 					if(!$account->checkAccountID($_REQUEST['service'],$id,"")){
@@ -67,20 +76,22 @@ class LOGIN{
 					//リダイレクト処理
 					header("Location: ".$url->getUrl());
 				}
-				//セッション未認証（期限切れ等）
-				else{
-					//リダイレクト処理
-					header("Location: ".$url->getUrl());
-				}
+				
 			}
 			//認証サイトへ遷移
 			else{
 				//Google(Gmail)
 				if($_REQUEST['service']=="gmail"){
-					$openid->gmail(session_id());
+					$openid->{$_REQUEST['service']}(session_id());
+					//call_user_func(array($openid,$_REQUEST['service']),session_id());
 				}
-				else if($_REQUEST['service']=="facebook"){
-					$openid->facebook(session_id());
+				//Mixi
+				else if($_REQUEST['service']=="mixi"){
+					$openid->mixi(session_id());
+				}
+				//Yahoo
+				else if($_REQUEST['service']=="yahoo"){
+					$openid->yahoo(session_id());
 				}
 			}
 		}

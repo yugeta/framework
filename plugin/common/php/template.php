@@ -190,17 +190,25 @@ class template{
 		//else{$check = 0;}
 		
 		//die($data[1]);
-		if($data[1]==""){$data[1]="''";}
+		
+		$ptn = $data[1];
+		if($data[1]==""){$ptn="''";}
+		
+		//die("eval:".gettype(eval("if(".$data[1]."){return 1;}else{return 0;}")));
+		
+		
+		//echo "--"."if(".$ptn."){return 1;}else{return 0;}\n";
 		
 		$val='';
-		
-		if(eval("if(".$data[1]."){return true;}else{return false;}")){
+		if(eval("if(".$ptn."){return 1;}else{return 0;}")){
 			$val = $data[2];
 		}
 		else if($data[3]){
 			$val = $data[3];
 		}
 		
+		//die("<!--".$sp.join(":",$data).$sp."-->"."\n".str_replace("<!--".$sp.join(":",$data).$sp."-->" , $val , $tpl));
+		//return $tpl;
 		return str_replace("<!--".$sp.join(":",$data).$sp."-->" , $val , $tpl);
 	}
 	

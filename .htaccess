@@ -3,7 +3,7 @@ AddDefaultCharset UTF-8
 AddLanguage jp .jp
 
 php_value memory_limit 1G
-php_value post_max_size 12G
+#php_value post_max_size 12G
 php_value upload_max_filesize 10G
 #php_value max_file_uploads 1000
 

@@ -21,7 +21,7 @@ $GLOBALS['view']['message']  = '';//画面表示用メッセージ（システ�
 $GLOBALS['view']['contents'] = '';//コンテンツ箇所の内部HTML
 
 
-$_REQUEST['p'] = ($_REQUEST['p'])?$_REQUEST['p']:"common";
+//$_REQUEST['p'] = ($_REQUEST['p'])?$_REQUEST['p']:"common";
 
 /*----------
  * 関数
@@ -35,9 +35,45 @@ $common->requires();
 class system_common{
 	
 	//Load-config
+	function loadConfig($data_file='common/config.dat'){
+		
+		$file = "data/".$data_file;
+		
+		unset($data);
+		
+		//database
+		if(file_exists($file)){
+			$datas = explode("\n",file_get_contents($file));
+			
+			$lines="";
+			
+			for($i=0,$c=count($datas);$i<$c;$i++){
+				
+				if($datas[$i]==""){continue;}
+				
+				// #で始まる行はコメント行
+				//if(preg_match("/^".'#'."/",$datas[$i])){continue;}
+				$d1 = explode("#",$datas[$i]);
+				$datas[$i] = $d1[0];
+				
+				//$d2 = explode("//",$datas[$i]);
+				//$datas[$i] = $d2[0];
+				
+				
+				$lines.= $datas[$i]."\n";
+			}
+			//die($lines);
+			if($lines){
+				$data = json_decode($lines,true);
+			}
+			
+		}
+		return $data;
+	}
+	/*
 	function loadConfig($p='common'){
 		
-		$file = "data/".$p."/config.dat";
+		$file = "data/".$p."/config.bak";
 		
 		unset($data);
 		
@@ -64,6 +100,7 @@ class system_common{
 		}
 		return $data;
 	}
+	*/
 	
 	//Directory require (plugin/php)
 	function requires($plugin="common"){
@@ -100,6 +137,9 @@ class system_common{
 
 //Load-config
 $GLOBALS['sys']['config'] = $common->loadConfig();
+//print_r($GLOBALS['sys']['config']);exit();
+$GLOBALS['sys']['openid'] = $common->loadConfig("common/openid.dat");
+//echo "test:";print_r($GLOBALS['sys']['openid']);exit();
 
 //認証処理
 session_start();
@@ -109,13 +149,6 @@ session_start();
 $login = new LOGIN();
 $login->auth($_REQUEST['m']);
 
-//アカウント登録
-
-//ログアウト
-
-//OAUTH認証(open-id)
-
-//認証後
 
 //HTML表示処理(対象プラグインの実行)----------
 
@@ -124,19 +157,21 @@ $p = ($_REQUEST['p'])?$_REQUEST['p']:"common";
 $m = ($_REQUEST['m'])?$_REQUEST['m']:"index";
 $f = ($_REQUEST['f'])?$_REQUEST['f']:"common";
 $dir = $GLOBALS['sys']['plugin']."/".$p."/html/";
+//die($dir." : ".$m." : ".$f." : ");
 
-//$view = new view();
-//$view->html($p,$m);
+
+//pluginのモジュール一括読み込み
+if($_REQUEST['p']!='common'){
+	$common->requires($_REQUEST['p']);
+}
+
+
 //フレーム表示
-//$template = new template($dir.$m.".html");
 $template = new template();
 
-//die($dir.$f.".html:".$dir.$m.".html:".$GLOBAL['data']['common']['message']);
 //コンテンツ
 $GLOBALS['view']['html'] = $template->file2HTML($dir.$m.".html");
-//die($GLOBALS['data']['html']);
-//die($dir.$f.".html"."/".$GLOBALS['data']['html']);
-//die($GLOBAL['data']['common']['message']);
+
 //フレーム
 echo $template->file2HTML($dir.$f.".html");
 
