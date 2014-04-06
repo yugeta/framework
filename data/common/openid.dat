@@ -1,18 +1,51 @@
 # 1:service 2:bool 3: 4:site-url 5:
 {
-	"gmail":{
+	"google":{
 		"flg":"true",
-		"url":"https://www.google.com/accounts/o8/ud"
+		"url":"https://www.google.com/accounts/o8/ud",
+		"request":{
+			"id":"openid_ext1_value_email",
+			"mail":"openid_ext1_value_email",
+			"language":"openid_ext1_value_language",
+			"res_time":"openid_response_nonce",
+			"firstname":"",
+			"lastname":""
+		}
 	},
 	"yahoo":{
 		"flg":"false",
-		"url":"https://login.yahoo.co.jp/config/login"
+		"url":"https://login.yahoo.co.jp/config/login",
+		"request":{
+			"id":"",
+			"mail":"",
+			"language":"",
+			"res_time":"",
+			"firstname":"",
+			"lastname":""
+		}
 	},
 	"mixi":{
 		"flg":"true",
-		"url":"https://mixi.jp/openid_server.pl"
+		"url":"https://mixi.jp/openid_server.pl",
+		"request":{
+			"id":"openid_claimed_id",
+			"mail":"",
+			"language":"",
+			"res_time":"",
+			"firstname":"",
+			"lastname":""
+		}
 	},
 	"twitter":{
-		"flg":"false"
+		"flg":"false",
+		"url":"",
+		"request":{
+			"id":"",
+			"mail":"",
+			"language":"",
+			"res_time":"",
+			"firstname":"",
+			"lastname":""
+		}
 	}
 }

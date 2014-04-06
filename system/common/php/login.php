@@ -153,7 +153,11 @@ class LOGIN{
 	//Logout
 	function setLogout(){
 		
+		//セッション情報を削除
 		unset($_SESSION['id']);
+		
+		//cookie情報の削除
+		
 		
 		//リダイレクト
 		$url = new URL();

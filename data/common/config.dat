@@ -3,13 +3,11 @@
 	"database_type":"file",
 
 	#ログイン後のデフォルトTOOL（プラグインID）[ null:system ]-----
-	"default_plugin":"db",
-
-	#OpenID連動[ true,false(blank) ]-----
-	"openid_google":"true",
-	"openid_yahoo":"false",
-	"openid_twitter":"true",
-	"openid_mixi":"true"
+	"default_plugin":"cinema",
+	
+	
+	#-----
+	"$":""
 }
 
 

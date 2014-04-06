@@ -86,6 +86,10 @@ class template{
 				else if($key== "session"){
 					$tpl = $this->check_query($tpl,$key,$val,$_SESSION[$val],$sp);
 				}
+				//クッキー値
+				else if($key=="cookie"){
+					$tpl = $this->check_query($tpl,$key,$val,$_COOKIE[$val],$sp);
+				}
 				//定数の取得
 				else if($key== "define"){
 					$tpl = $this->check_query($tpl,$key,$val,constant($val),$sp);
@@ -120,6 +124,7 @@ class template{
 				else if($key=="system"){
 					$tpl = $this->check_system($tpl,$key,$val,$sp);
 				}
+				
 				//条件文の実行
 				else if($key=="if"){
 					$tpl = $this->check_if($tpl,$data,$sp);
@@ -189,12 +194,17 @@ class template{
 		if($data[1]==""){$ptn="''";}
 		
 		$val='';
+		//$ptn = str_replace("/","",$ptn);
+		//$ptn = str_replace(".","",$ptn);
+		//$ptn = str_replace(":","",$ptn);
 		if(eval("if(".$ptn."){return 1;}else{return 0;}")){
 			$val = $data[2];
 		}
 		else if($data[3]){
 			$val = $data[3];
 		}
+		
+		//echo $data[1]."/".$val."/".join(":",$data)." : ".$ptn."\n";
 		
 		return str_replace("<!--".$sp.join(":",$data).$sp."-->" , $val , $tpl);
 	}

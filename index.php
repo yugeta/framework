@@ -30,6 +30,8 @@ $common = new SYSTEM_COMMON();
 
 //Directory require (plugin/php)
 $common->requires($GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/php/");
+$common->requires($GLOBALS['sys']['system']."/openid/php/");
+$common->requires($GLOBALS['sys']['system']."/bootstrap/php/");
 
 class SYSTEM_COMMON{
 	

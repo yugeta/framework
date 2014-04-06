@@ -68,24 +68,29 @@
 	margin:8px 0;
 	text-align:center;
 }
+/*
 .login_sns img{
 	display:inline-block;
 	width:32px;
 	margin:0 4px;
-	/*margin:8px;*/
 }
-
+*/
 .openid_link{
 	display:inline-block;
-	width:200px;
-	height:40px;
+	width:150px;
+	/*height:40px;*/
 	line-height:40px;
 	border-radius:4px;
 	/*padding:4px;*/
-	border:1px solid #888;
-	background-color:#CCC;
+	/*border:1px solid #888;*/
+	/*background-color:#CCC;*/
 	text-align:left;
 	vertical-align:middle;
+	margin:4px;
+}
+.openid_link img{
+	width:150px;
+	height:auto;
 }
 
 div.input_line{
