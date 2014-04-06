@@ -22,8 +22,38 @@ framework
 - login,logout
 - 認証後->toolモジュール実行
 - 階層
-  + /.htaccess
-  + /index.php
+  /
+  ├─data/
+  │    ├─common/
+  │    │  ├─config.dat
+  │    │  ├─openid.dat
+  │    │  └─user.dat
+  │    │
+  │    └─*plugins...
+  │
+  ├─plugin/
+  │    │
+  │    ├─bootstrap/
+  │    └─*plugins.../
+  │
+  ├─system/
+  │    ├─common/
+  │    │  ├─css
+  │    │  ├─html
+  │    │  ├─img
+  │    │  ├─js
+  │    │  └─php
+  │    │
+  │    ├─bootstrap/
+  │    │  ├─css
+  │    │  ├─fonts
+  │    │  └─js
+  │    │
+  │    └─openid/
+  │
+  ├─.htaccess
+  └─index.php
+  
   + /data [*any]
   + /data/system/config.dat
   + /data/system/users.dat
