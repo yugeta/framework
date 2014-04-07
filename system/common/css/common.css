@@ -47,6 +47,7 @@
 	display:inline-block;
 	text-align:left;
 }
+/*
 .input_area input[type="text"],.input_area input[type="password"],select.setting{
 	width:100%;
 	height:40px;
@@ -54,6 +55,8 @@
 	padding:8px;
 	font-size:20px;
 }
+*/
+/*
 .input_area input[type="submit"]{
 	width:100%;
 	height:40px;
@@ -61,7 +64,7 @@
 	right:0;
 	font-size:16px;
 }
-
+*/
 /*sns-login-button*/
 .login_sns{
 	width:100%;
@@ -107,6 +110,26 @@ div.input_line{
 }
 
 /*etc*/
+
+.base-default{
+	padding:4px;
+	margin:4px 0;
+	border-radius:4px;
+}
+
+.base-color-gray{
+	border:1px solid #888;
+	background-color:#F6F6F6;
+}
+.base-color-lightgreen{
+	border:1px solid #CFC;
+	background-color:#EFE;
+}
+.base-color-red{
+	border:1px solid #FCC;
+	background-color:#FEE;
+}
+
 
 .hero-unit{
 	background-color:#F6F6F6;

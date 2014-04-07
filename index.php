@@ -29,9 +29,18 @@ $GLOBALS['view']['contents'] = '';//コンテンツ箇所の内部HTML
 $common = new SYSTEM_COMMON();
 
 //Directory require (plugin/php)
+
+$system_lists = scandir($GLOBALS['sys']['system']);
+
+for($i=0,$c=count($system_lists);$i<$c;$i++){
+	$common->requires($GLOBALS['sys']['system']."/".$system_lists[$i]."/php/");
+}
+
+/*
 $common->requires($GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/php/");
 $common->requires($GLOBALS['sys']['system']."/openid/php/");
 $common->requires($GLOBALS['sys']['system']."/bootstrap/php/");
+*/
 
 class SYSTEM_COMMON{
 	

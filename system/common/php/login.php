@@ -176,23 +176,28 @@ class LOGIN{
 		
 		//mysql
 		if($GLOBALS['sys']['config']['database_type']=='mysql'){
-			if(!$this->login_check_mysql($service,$id,$pw)){return;}
+			$data = $this->login_check_mysql($service,$id,$pw);
+			if(!$data){return;}
 		}
 		//mongodb
 		else if($GLOBALS['sys']['config']['database_type']=='mongodb'){
-			if(!$this->login_check_mongodb($service,$id,$pw)){return;}
+			$data = $this->login_check_mongodb($service,$id,$pw);
+			if(!$data){return;}
 		}
 		//couched
 		else if($GLOBALS['sys']['config']['database_type']=='couchdb'){
-			if(!$this->login_check_couchdb($service,$id,$pw)){return;}
+			$data = $this->login_check_couchdb($service,$id,$pw);
+			if(!$data){return;}
 		}
 		//file
 		else{
-			if(!$this->login_check_file($service,$id,$pw)){return;}
+			$data = $this->login_check_file($service,$id,$pw);
+			if(!$data){return;}
 		}
 		
 		//セッションデータ保持
-		$_SESSION['id'] = $id;
+		//$_SESSION['id'] = $id;
+		$this->setSessionData($data);
 		
 		//クッキー時間の書き換え
 		if($_REQUEST['cookie_time']){
@@ -227,7 +232,7 @@ class LOGIN{
 		//ユーザーデータ読み込み
 		$data_users = explode("\n",file_get_contents($file));
 		
-		unset($pw_data);
+		unset($pw_data,$buf);
 		
 		//データ内のライン処理
 		for($i=0,$c=count($data_users);$i<$c;$i++){
@@ -253,11 +258,45 @@ class LOGIN{
 			
 			//パスワード保持
 			$pw_data = $sp[4];
-			
+			$buf = $sp;
 		}
 		
 		//パスワード確認
-		if($pw_data == $pw){return true;}
+		if($pw_data == $pw){
+			
+			$data = array(
+				"service"=>$buf[1],
+				"auth"=>$buf[2],
+				"id"=>$buf[3],
+				"name"=>$buf[5],
+				"mail"=>$buf[6],
+				"img"=>$buf[7],
+			);
+			//die($pw."/".$buf[5]);
+			return $data;
+		}
+	}
+	
+	//セッションデータ保持 ( id , name , mail , service )
+	function setSessionData($data=null){
+		
+		if(!$data){return;}
+		
+		$_SESSION['id']   = $data['id'];
+		$_SESSION['name'] = $data['name'];
+		$_SESSION['mail'] = $data['mail'];
+		$_SESSION['service'] = $data['service'];
+		$_SESSION['auth'] = $data['auth'];
+		$_SESSION['img']  = $data['img'];
+		
+	}
+	function delSessionData(){
+		unset($_SESSION['id']);
+		unset($_SESSION['name']);
+		unset($_SESSION['mail']);
+		unset($_SESSION['service']);
+		unset($_SESSION['auth']);
+		unset($_SESSION['img']);
 	}
 	
 	
