@@ -6,20 +6,18 @@
 	
 	<div class='contents'>
 		
-		<h3 class='contents_title'>
-			<img src='<!--%globals:sys:system%-->/<!--%globals:sys:common%-->/img/cc_black/user_icon&32.png'>
-			Account Setting
-		</h3>
+		<h3><i class='glyphicon glyphicon-user'></i> Account Setting</h3>
 		
 		<div class='message'><!--%globals:view:message%--></div>
 		
 		<div class='input_area'>
-			<div class='input_line'><input type='text' name='data[id]' value='<!--%class:ACCOUNT:getAccountInfo("id")%-->' placeholder='ID' readonly/></div>
-			<div class='input_line'><input type='password' name='data[pw]' value='<!--%class:ACCOUNT:getAccountInfo("pw")%-->' placeholder='Password'/><br>※パスワードを変更する</div>
-			<div class='input_line'><input type='text' name='data[nm]' value='<!--%class:ACCOUNT:getAccountInfo("nm")%-->' placeholder='Name'/></div>
-			<div class='input_line'><input type='text' name='data[mail]' value='<!--%class:ACCOUNT:getAccountInfo("mail")%-->' placeholder='eMail'/></div>
+			<input type='text' name='data[img]' value='<!--%class:ACCOUNT:getAccountInfo("img")%-->' class='form-control' placeholder='Image'/>
+			<input type='text' name='data[id]' value='<!--%class:ACCOUNT:getAccountInfo("id")%-->' class='form-control' placeholder='ID' readonly/>
+			<input type='password' name='data[pw]' value='<!--%class:ACCOUNT:getAccountInfo("pw")%-->' class='form-control' placeholder='Password'/>
+			<input type='text' name='data[nm]' value='<!--%class:ACCOUNT:getAccountInfo("nm")%-->' class='form-control' placeholder='Name'/>
+			<input type='text' name='data[mail]' value='<!--%class:ACCOUNT:getAccountInfo("mail")%-->' class='form-control' placeholder='eMail'/>
 			
-			<div class='input_line'><input type='submit' value='Update' /></div>
+			<div class='input_line'><input type='submit' value='Update' class='btn btn-default' /></div>
 		</div>
 		
 	</div>
