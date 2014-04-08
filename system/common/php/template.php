@@ -68,6 +68,11 @@ class template{
 				if($key=="function"){
 					$tpl = $this->check_function($tpl,$val,$sp);
 				}
+				//オブジェクトの直接実行
+				else if($key=="class"){
+					$tpl = $this->check_class($tpl,$data,$sp);
+				}
+				
 				//Query情報の取得
 				else if($key=="request"){
 					$tpl = $this->check_query($tpl,$key,$val,$_REQUEST[$val],$sp);
@@ -129,12 +134,7 @@ class template{
 				else if($key=="if"){
 					$tpl = $this->check_if($tpl,$data,$sp);
 				}
-				//オブジェクトの直接実行
-				else if($key=="class"){
-					//$data2 = explode(":",$fnc[1][$i]);
-					//array_shift($data);
-					$tpl = $this->check_class($tpl,$data,$sp);
-				}
+				
 			}
 		}
 		

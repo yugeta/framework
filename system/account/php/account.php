@@ -35,7 +35,8 @@ class ACCOUNT{
 			$this->setAccount(array("0",$service,"",$data['id'],$data['pw'],$data['nm'],$data['mail'],$data['img']));
 			//header("Location: ".$url->url()."?tool=system&mode=account_setting_complete");
 			$GLOBALS['view']['message'] = "登録情報を更新しました。";
-			$_REQUEST['m'] = "account_setting";
+			$_REQUEST['p2'] = "account";
+			$_REQUEST['m'] = "setting";
 		}
 		//登録画面
 		else{
@@ -227,4 +228,56 @@ class ACCOUNT{
 		}
 		
 	}
+	
+	//アカウント画像
+	function getAccountImage(){
+		
+		if($_SESSION['img'] && is_file($_SESSION['img'])){
+			return "<img class='account_image' src='".$_SESSION['img']."' />";
+		}
+		//デフォルト画像
+		else{
+			$template = new TEMPLATE();
+			return $template->file2HTML($GLOBALS['sys']['system']."/account/html/account_image_default.html");
+		}
+		
+	}
+	
+	//
+	function getInfo($user_id){
+		//UID指定がない場合は処理無し
+		if(!$user_id){return;}
+		
+		$html="";
+		
+		//画像表示
+		if($_SESSION['img'] && is_file($_SESSION['img'])){
+			$html.= "<img class='account_image' src='".$_SESSION['img']."'>\n";
+			$html.= "<br>\n";
+		}
+		else{
+			$tpl = new TEMPLATE();
+			$html.= $tpl->file2HTML($GLOBALS['sys']['system']."/account/html/account_image_default.html");
+			$html.= "<br>\n";
+		}
+		
+		//名前表示
+		if($_SESSION['name']){
+			$html.= "name:".$_SESSION['name'];
+			$html.= "<br>\n";
+		}
+		
+		//openidチェック
+		if($_SESSION['service']){
+			$html.= "open-id:".$_SESSION['service'];
+			$html.= "<br>\n";
+		}
+		
+		//$html.= $_SESSION['service']."\n";
+		
+		return $html;
+		
+	}
+	
+	
 }

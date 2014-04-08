@@ -1,0 +1,22 @@
+.base-default{
+	padding:4px;
+	margin:4px 0;
+	border-radius:4px;
+}
+
+.base-color-gray{
+	border:1px solid #888;
+	background-color:#F6F6F6;
+}
+.base-color-lightgreen{
+	border:1px solid #CFC;
+	background-color:#EFE;
+}
+.base-color-green{
+	border:1px solid #8F8;
+	background-color:#CFC;
+}
+.base-color-red{
+	border:1px solid #F88;
+	background-color:#FCC;
+}

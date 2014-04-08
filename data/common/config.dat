@@ -5,6 +5,8 @@
 	#ログイン後のデフォルトTOOL（プラグインID）[ null:system ]-----
 	"default_plugin":"cinema",
 	
+	#デフォルトのHTMLテンプレート（フレーム）
+	"tpl_frame":"common.html",
 	
 	#-----
 	"$":""
