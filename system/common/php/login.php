@@ -42,9 +42,11 @@ class LOGIN{
 					$keys = array_keys($_REQUEST);
 					$a="";
 					for($i=0;$i<count($keys);$i++){
-						$a.= $keys[$i]." = ".$_REQUEST[$keys[$i]]."<br>\n";
+						$a.= "<h4 style='color:red;'>".$keys[$i]."</h4>\n".$_REQUEST[$keys[$i]]."\n";
 					}
-					$GLOBALS['view']['html'] = "test:".$a;
+					$b = "--\n".file_get_contents($_REQUEST['openid_claimed_id'])."&"."\n--\n";
+					
+					$GLOBALS['view']['html'] = "<pre>".$a.$b."</pre>";
 					//echo "OK<br>\n";
 					$template = new template();
 					echo $template->file2HTML($GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/html/common.html");
@@ -80,22 +82,7 @@ class LOGIN{
 			}
 			//認証サイトへ遷移
 			else{
-				$openid->services($_REQUEST['service'],session_id());
-				/*
-				//Google(Gmail)
-				if($_REQUEST['service']=="gmail"){
-					$openid->{$_REQUEST['service']}(session_id());
-					//call_user_func(array($openid,$_REQUEST['service']),session_id());
-				}
-				//Mixi
-				else if($_REQUEST['service']=="mixi"){
-					$openid->mixi(session_id());
-				}
-				//Yahoo
-				else if($_REQUEST['service']=="yahoo"){
-					$openid->yahoo(session_id());
-				}
-				*/
+				$openid->services($_REQUEST['service'],$_REQUEST['check']);
 			}
 		}
 		//認証済み

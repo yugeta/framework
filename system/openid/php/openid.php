@@ -5,15 +5,18 @@ class OPENID{
 	/*==========
 	サイト別認証処理
 	==========*/
-	function services($service=null,$session_id=null){
-		if(!$service || !$session_id){return;}
-		$this->specs($service,$GLOBALS['sys']['openid'][$service]['url'],$session_id,$_REQUEST['check'],$_REQUEST['cookie_time']);
+	function services($service="",$check=""){
+		if(!$service){return;}
+		$this->specs($service,$check);
 	}
 	
 	//open-idデフォルト
-	function specs($service,$openid_url,$session_id,$check,$cookie_time){
+	function specs($service,$check=""){
 		
+		$session_id = session_id();
 		if(!$session_id){return;}
+		
+		$openid_url = $GLOBALS['sys']['openid'][$service]['url'];
 		
 		$url = new URL();
 		
@@ -25,7 +28,7 @@ class OPENID{
 			'openid.ns.max_auth_age'=> '300',
 			'openid.claimed_id'		=> 'http://specs.openid.net/auth/2.0/identifier_select',
 			'openid.identity'		=> 'http://specs.openid.net/auth/2.0/identifier_select',
-			'openid.return_to'		=> $mysite.'?m=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$cookie_time,
+			'openid.return_to'		=> $mysite.'?m=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$_REQUEST['cookie_time'],
 			'openid.realm'			=> $mysite,
 			'openid.mode'			=> 'checkid_setup',
 			'openid.ui.ns'			=> 'http://specs.openid.net/extensions/ui/1.0',
@@ -34,8 +37,9 @@ class OPENID{
 			'openid.ns.ax'			=> 'http://openid.net/srv/ax/1.0',
 			'openid.ax.mode'		=> 'fetch_request',
 			'openid.ax.type.email'	=> 'http://axschema.org/contact/email',
-			'openid.ax.type.language'=> 'http://axschema.org/pref/language',
-			'openid.ax.required'	=> 'email,language'
+			'openid.ax.type.guid'	=> 'http://schemas.openid.net/ax/api/user_id',
+			'openid.ax.type.language'=>'http://axschema.org/pref/language',
+			'openid.ax.required'	=> 'email,guid,language'
 		);
 		
 		foreach($data as $key=>$val){
@@ -151,8 +155,13 @@ class OPENID{
 	}
 	
 	//ボタン表示
-	function view_button($service){
+	function view_button($service,$check=""){
 		if(!$service){return;}
+		
+		//管理モードチェック
+		if($check){
+			$GLOBALS['sys']['openid_check'] = $check;
+		}
 		
 		$template = new template();
 		
