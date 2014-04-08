@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Bootstrap core CSS -->
+		<!--
+		<link href="../..//bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="../..//bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		-->
+		<!-- Bootstrap theme -->
+		<!--
+		<link href="../..//bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="../..//bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+		-->
+		<style type='text/css'>
+			head,body{
+				margin:0;
+				padding:0;
+				border:0;
+				overflow:hidden;
+				text-align:center;
+			}
+			input[type='file']{
+				width:100%;
+				padding:0;
+				/*height:100%;*/
+			}
+			input[type='button']{
+				width:70%;
+				height:30px;
+				-webkit-appearance:button;
+				margin:4px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<form name='form1' method='post' enctype='multipart/form-data'>
+			<input type='file' name='file1' onchange='document.form1.submit()' style='display:none;'>
+			<input type='button' value='+ 画像を登録する' onclick='document.form1.file1.click()'>
+		</form>
+		<form name='form2'>
+			<input type='button' value='- 画像を削除する' onclick='image_delete()'>
+		</form>
+
+<!-- Bootstrap JS -->
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="../..//bootstrap/js/bootstrap.js"></script>
+-->
+
+<script type='text/javascript'>
+	//iframeの取得
+	var parent_iframe = parent.document.getElementById("account_upload");
+	if(parent_iframe!=null){
+		//送信先の設定
+		document.form1.action = parent_iframe.getAttribute("data-submit");
+		//対象ファイルの設定（保存時のみ）
+		var src = location.href.split("?");
+			if(src.length>=2){
+			var querys = src[1].split("&");
+			var query={};
+			var path = "";
+			var filename = "";
+			for(var i=0;i<querys.length;i++){
+				var sp = querys[i].split("=");
+				
+				if(sp[0]=="path" && sp[1]){
+					path = sp[1];
+				}
+				else if(sp[0]=="filename" && sp[1]){
+					filename = sp[1];
+				}
+			}
+			//入力フォームにセット
+			if(path+filename){
+				parent.document.form1['data[img]'].value = path+filename;
+				
+				//画像をセット
+				var account_image = parent.document.getElementById("account_image");
+				if(account_image!=null){
+					account_image.innerHTML = "<img class='account_image' src='"+path+filename+"?"+(+new Date())+"'>";
+				}
+			}
+		}
+	}
+	
+	function image_delete(){
+		
+		//項目値をblankにする
+		parent.document.form1['data[img]'].value = '';
+		
+		//画像をデフォルトにする。
+		var account_image = parent.document.getElementById("account_image");
+		if(account_image!=null){
+			account_image.innerHTML = "<div class='account_image_default'><i class='glyphicon glyphicon-user'></i></div>";
+		}
+		
+	}
+</script>
+
+		
+	</body>
+</html>

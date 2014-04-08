@@ -8,8 +8,8 @@
 		<div class='message'><!--%globals:view:message%--></div>
 		
 		<div class='input_area'>
-			<input type='text' name='id' class='form-control' placeholder='ID'/><br>
-			<input type='password' name='pw' class='form-control' placeholder='Password'/><br>
+			<input type='text' name='id' class='form-control' placeholder='ID'/>
+			<input type='password' name='pw' class='form-control' placeholder='Password'/>
 			<label class='login_keep'>
 				<input type='checkbox' name='cookie_time' value='86400'> ※ログインしたままにする
 			</label><br>
@@ -21,6 +21,12 @@
 			<!--%class:openid:view_button("google")%-->
 			<!--%class:openid:view_button("mixi")%-->
 			<!--%class:openid:view_button("yahoo")%-->
+		</div>
+		
+		<div class='btn-group' style='display:none;'>
+			<!--%class:openid:view_button("google","check")%-->
+			<!--%class:openid:view_button("mixi","check")%-->
+			<!--%class:openid:view_button("yahoo","check")%-->
 		</div>
 		
 		<div class='login_sns' style='display:none;'>

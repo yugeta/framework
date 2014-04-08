@@ -5,15 +5,62 @@ class OPENID{
 	/*==========
 	サイト別認証処理
 	==========*/
-	function services($service=null,$session_id=null){
-		if(!$service || !$session_id){return;}
-		$this->specs($service,$GLOBALS['sys']['openid'][$service]['url'],$session_id,$_REQUEST['check'],$_REQUEST['cookie_time']);
+	function services($service="",$check=""){
+		if(!$service){return;}
+		$this->{$GLOBALS['sys']['openid'][$service]['type']}($service,$check);
 	}
 	
-	//open-idデフォルト
-	function specs($service,$openid_url,$session_id,$check,$cookie_time){
+	//open-idタイプ別リクエスト処理
+	function openid_1_0($service,$check=""){
 		
+		$session_id = session_id();
 		if(!$session_id){return;}
+		
+		$openid_url = $GLOBALS['sys']['openid'][$service]['url'];
+		
+		$url = new URL();
+		
+		$mysite = $url->getUrl();
+		
+		$data=array(
+			'openid.ns'				=> 'http://specs.openid.net/auth/1.0',
+			'openid.ns.pape'		=> 'http://specs.openid.net/extensions/pape/1.0',
+			'openid.ns.max_auth_age'=> '300',
+			'openid.claimed_id'		=> 'http://specs.openid.net/auth/1.0/identifier_select',
+			'openid.identity'		=> 'http://specs.openid.net/auth/1.0/identifier_select',
+			'openid.return_to'		=> $mysite.'?m=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$_REQUEST['cookie_time'],
+			'openid.realm'			=> $mysite,
+			'openid.mode'			=> 'checkid_setup',
+			'openid.ui.ns'			=> 'http://specs.openid.net/extensions/ui/1.0',
+			'openid.ui.mode'		=> '=popup',
+			'openid.ui.icon'		=> 'true',
+			'openid.ns.ax'			=> 'http://openid.net/srv/ax/1.0',
+			'openid.ax.mode'		=> 'fetch_request',
+			'openid.ax.type.email'	=> 'http://axschema.org/contact/email',
+			'openid.ax.type.guid'	=> 'http://schemas.openid.net/ax/api/user_id',
+			'openid.ax.type.language'=>'http://axschema.org/pref/language',
+			'openid.ax.required'	=> 'email,guid,language'
+		);
+		
+		foreach($data as $key=>$val){
+			$q[] = $key."=".urlencode($val);
+		}
+		
+		//separate
+		$separate_value = "?";
+		if(preg_match("/".$separate_value."/",$openid_url)){
+			$separate_value = "&";
+		}
+		
+		//サイトへ移動
+		header("Location: ".$openid_url.$separate_value.join("&",$q));
+	}
+	function openid_2_0($service,$check=""){
+		
+		$session_id = session_id();
+		if(!$session_id){return;}
+		
+		$openid_url = $GLOBALS['sys']['openid'][$service]['url'];
 		
 		$url = new URL();
 		
@@ -25,7 +72,7 @@ class OPENID{
 			'openid.ns.max_auth_age'=> '300',
 			'openid.claimed_id'		=> 'http://specs.openid.net/auth/2.0/identifier_select',
 			'openid.identity'		=> 'http://specs.openid.net/auth/2.0/identifier_select',
-			'openid.return_to'		=> $mysite.'?m=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$cookie_time,
+			'openid.return_to'		=> $mysite.'?m=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$_REQUEST['cookie_time'],
 			'openid.realm'			=> $mysite,
 			'openid.mode'			=> 'checkid_setup',
 			'openid.ui.ns'			=> 'http://specs.openid.net/extensions/ui/1.0',
@@ -34,8 +81,9 @@ class OPENID{
 			'openid.ns.ax'			=> 'http://openid.net/srv/ax/1.0',
 			'openid.ax.mode'		=> 'fetch_request',
 			'openid.ax.type.email'	=> 'http://axschema.org/contact/email',
-			'openid.ax.type.language'=> 'http://axschema.org/pref/language',
-			'openid.ax.required'	=> 'email,language'
+			'openid.ax.type.guid'	=> 'http://schemas.openid.net/ax/api/user_id',
+			'openid.ax.type.language'=>'http://axschema.org/pref/language',
+			'openid.ax.required'	=> 'email,guid,language'
 		);
 		
 		foreach($data as $key=>$val){
@@ -64,95 +112,16 @@ class OPENID{
 		
 		
 		return $val;
-		/*
-		if($service=="gmail"){
-			if($mode=="id"){
-				return $_REQUEST['openid_ext1_value_email'];
-			}
-			else if($mode=="mail"){
-				return $_REQUEST['openid_ext1_value_email'];
-			}
-			else if($mode=='language'){
-				return $_REQUEST['openid_ext1_value_language'];
-			}
-			else if($mode=='res_time'){
-				return $_REQUEST['openid_response_nonce'];
-			}
-			else if($mode=='firstname'){
-				
-			}
-			else if($mode=='lastname'){
-				
-			}
-		}
-		else if($service=='yahoo'){
-			if($mode=="id"){
-				
-			}
-			else if($mode=='mail'){
-				
-			}
-			else if($mode=='language'){
-				
-			}
-			else if($mode=='res_time'){
-				
-			}
-			else if($mode=='firstname'){
-				
-			}
-			else if($mode=='lastname'){
-				
-			}
-		}
-		else if($service=='twitter'){
-			if($mode=="id"){
-				
-			}
-			else if($mode=='mail'){
-				
-			}
-			else if($mode=='language'){
-				
-			}
-			else if($mode=='res_time'){
-				
-			}
-			else if($mode=='firstname'){
-				
-			}
-			else if($mode=='lastname'){
-				
-			}
-		}
-		else if($service=='mixi'){
-			if($mode=="id"){
-				if(!$_REQUEST['openid_claimed_id']){return;}
-				$mixi_id = explode("/",$_REQUEST['openid_claimed_id']);
-				return $mixi_id[3];
-			}
-			else if($mode=="mail"){
-				return $_REQUEST['openid_ext1_value_email'];
-			}
-			else if($mode=='language'){
-				return $_REQUEST['openid_ext1_value_language'];
-			}
-			else if($mode=='res_time'){
-				return $_REQUEST['openid_response_nonce'];
-			}
-			else if($mode=='firstname'){
-				
-			}
-			else if($mode=='lastname'){
-				
-			}
-		}
-		*/
 	}
 	
 	//ボタン表示
-	function view_button($service){
+	function view_button($service,$check=""){
 		if(!$service){return;}
+		
+		//管理モードチェック
+		if($check){
+			$GLOBALS['sys']['openid_check'] = $check;
+		}
 		
 		$template = new template();
 		

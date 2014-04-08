@@ -131,7 +131,12 @@ $f = ($_REQUEST['f'])?$_REQUEST['f']:$GLOBALS['sys']['common'];
 
 //pluginのモジュール一括読み込み
 if(!$_REQUEST['p'] || $_REQUEST['p']==$GLOBALS['sys']['common']){
-	$dir = $GLOBALS['sys']['system']."/".$p."/html/";
+	if($_REQUEST['p2'] ){
+		$dir = $GLOBALS['sys']['system']."/".$_REQUEST['p2'] ."/html/";
+	}
+	else{
+		$dir = $GLOBALS['sys']['system']."/".$p."/html/";
+	}
 }
 //plugin処理
 else{
@@ -145,10 +150,22 @@ else{
 $template = new template();
 
 //コンテンツ
-$GLOBALS['view']['html'] = $template->file2HTML($dir.$m.".html");
+if($_REQUEST['class'] && class_exists($_REQUEST['class']) && $_REQUEST['function'] && method_exists($_REQUEST['class'],$_REQUEST['function'])){
+	$GLOBALS['view']['html'] = call_user_func(array($_REQUEST['class'],$_REQUEST['function']));
+}
+else{
+	$GLOBALS['view']['html'] = $template->file2HTML($dir.$m.".html");
+}
 
 //フレーム
-echo $template->file2HTML($dir.$f.".html");
+//echo $template->file2HTML($dir.$f.".html");
+if($_REQUEST['p'] && $_REQUEST['frame'] && is_file($GLOBALS['sys']['plugin']."/".$$_REQUEST['p']."/tpl/".$_REQUEST['frame'])){
+	$frame = $GLOBALS['sys']['plugin']."/".$$_REQUEST['p']."/tpl/".$_REQUEST['frame'];
+}
+else{
+	$frame = $GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/tpl/".$GLOBALS['sys']['config']['tpl_frame'];
+}
+echo $template->file2HTML($frame);
 
 
 

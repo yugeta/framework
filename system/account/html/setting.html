@@ -1,0 +1,55 @@
+
+	
+	<div class='container'>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='base-default base-color-green'>
+					<h1>
+						<i class='glyphicon glyphicon-user'></i> 
+						Account Setting
+					</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<form name='form1' method='post'>
+	<input type='hidden' name='m' value='regist' />
+	<input type='hidden' name='action' value='update' />
+	<input type='hidden' name='data[user_id_type]' value='<!--%globals:config:user_id_type%-->' />
+	<input type='hidden' name='data[service]' value='<!--%class:Account:getAccountInfo("service")%-->' />
+	
+	<div class='container'>
+		<div class='row'>
+			
+			<div class='col-sm-4'>
+				<div class='base-default base-color-gray'>
+					<div class='account_image' id='account_image'>
+						<!--%class:ACCOUNT:getAccountImage%-->
+					</div>
+					<iframe class='account_upload' id='account_upload' src='<!--%globals:sys:system%-->/account/html/account_image_upload.html?<!--%system:ymdhis%-->' data-submit='<!--%class:URL:getUrl%-->?class=UPLOAD&function=setFile&path=data/<!--%globals:sys:common%-->/account/&filename=<!--%session:id%-->&return=<!--%globals:sys:system%-->/account/html/account_image_upload.html'></iframe>
+					
+				</div>
+			</div>
+			
+			<div class='col-sm-8'>
+				<div class='base-default base-color-gray'>
+					<input type='hidden' name='data[img]' value='<!--%class:ACCOUNT:getAccountInfo("img")%-->' class='form-control' placeholder='Image'/>
+					<h4>ID</h4>
+					<input type='text' name='data[id]' value='<!--%class:ACCOUNT:getAccountInfo("id")%-->' class='form-control' placeholder='ID' readonly/>
+					<h4>Password</h4>
+					<input type='password' name='data[pw]' value='<!--%class:ACCOUNT:getAccountInfo("pw")%-->' class='form-control' placeholder='Password'/>
+					<h4>Name</h4>
+					<input type='text' name='data[nm]' value='<!--%class:ACCOUNT:getAccountInfo("nm")%-->' class='form-control' placeholder='Name'/>
+					<h4>Email</h4>
+					<input type='text' name='data[mail]' value='<!--%class:ACCOUNT:getAccountInfo("mail")%-->' class='form-control' placeholder='eMail'/>
+					
+					<br>
+					<div class='input_line'><input type='submit' value='Update' class='btn btn-default' /></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+</form>

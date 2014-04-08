@@ -2,9 +2,10 @@
 {
 	"google":{
 		"flg":"true",
+		"type":"openid_2_0",
 		"url":"https://www.google.com/accounts/o8/ud",
 		"request":{
-			"id":"openid_ext1_value_email",
+			"id":"openid_claimed_id",
 			"mail":"openid_ext1_value_email",
 			"language":"openid_ext1_value_language",
 			"res_time":"openid_response_nonce",
@@ -12,8 +13,24 @@
 			"lastname":""
 		}
 	},
+	
+	"mixi":{
+		"flg":"true",
+		"type":"openid_2_0",
+		"url":"https://mixi.jp/openid_server.pl",
+		"request":{
+			"id":"openid_claimed_id",
+			"mail":"",
+			"language":"",
+			"res_time":"openid_response_nonce",
+			"firstname":"",
+			"lastname":""
+		}
+	},
+	
 	"yahoo":{
 		"flg":"false",
+		"type":"openid_2_0",
 		"url":"https://login.yahoo.co.jp/config/login",
 		"request":{
 			"id":"",
@@ -24,20 +41,10 @@
 			"lastname":""
 		}
 	},
-	"mixi":{
-		"flg":"true",
-		"url":"https://mixi.jp/openid_server.pl",
-		"request":{
-			"id":"openid_claimed_id",
-			"mail":"",
-			"language":"",
-			"res_time":"",
-			"firstname":"",
-			"lastname":""
-		}
-	},
+	
 	"twitter":{
 		"flg":"false",
+		"type":"openid_2_0",
 		"url":"",
 		"request":{
 			"id":"",

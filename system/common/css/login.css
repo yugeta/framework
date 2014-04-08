@@ -1,0 +1,41 @@
+
+.login_keep{
+	width:100%;
+	display:inline-block;
+	font-weight:normal;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	color:#888;
+}
+
+/*sns-login-button*/
+.login_sns{
+	width:100%;
+	margin:8px 0;
+	text-align:center;
+}
+/*
+.login_sns img{
+	display:inline-block;
+	width:32px;
+	margin:0 4px;
+}
+*/
+.openid_link{
+	display:inline-block;
+	width:150px;
+	/*height:40px;*/
+	line-height:40px;
+	border-radius:4px;
+	/*padding:4px;*/
+	/*border:1px solid #888;*/
+	/*background-color:#CCC;*/
+	text-align:left;
+	vertical-align:middle;
+	margin:4px;
+}
+.openid_link img{
+	width:150px;
+	height:auto;
+}

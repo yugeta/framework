@@ -1,0 +1,35 @@
+.account_image_default{
+	width:128px;
+	height:128px;
+	margin:8px auto;
+	border-radius:64px;
+	border:1px solid #338;
+	background-color:#CCF;
+	font-size:80px;
+	line-height:128px;
+	color:#338;
+	text-align:center;
+}
+
+iframe.account_upload{
+	margin:0;
+	padding:0;
+	border:0;
+	width:100%;
+	height:100px;
+}
+
+div.account_image{
+	text-align:center;
+}
+img.account_image{
+	max-width:70%;
+	height:auto;
+	margin:4px;
+}
+
+/* info */
+.account-info{
+	
+}
+

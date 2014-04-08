@@ -2,8 +2,8 @@
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-12'>
-			<div class='base-default base-color-lightgreen'>
-				<h1>Cinema Spilit</h1>
+			<div class='base-default base-color-green'>
+				<h1>Cinema Spirits</h1>
 				<p class="lead">
 					映画魂
 				</p>
@@ -15,7 +15,7 @@
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-3'>
-			<div class='base-default base-color-red'>
+			<div class='base-default base-color-gray'>
 				<!--%class:CINEMA:lists%-->
 			</div>
 		</div>
@@ -25,8 +25,10 @@
 			</div>
 		</div>
 		<div class='col-sm-3'>
-			<div class='base-default base-color-red'>
-				<!--%tpl:<!--#globals:sys:system#-->/account/html/side_account_info.html%-->
+			<div class='base-default base-color-gray'>
+				<div class='account_image'>
+					<!--%class:ACCOUNT:getInfo(<!--#session:id#-->)%-->
+				</div>
 			</div>
 		</div>
 	</div>
