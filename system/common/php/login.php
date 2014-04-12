@@ -55,7 +55,7 @@ class LOGIN{
 					$GLOBALS['view']['html'] = "<pre>".$a.$b."</pre>";
 					//echo "OK<br>\n";
 					$template = new template();
-					echo $template->file2HTML($GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/html/common.html");
+					echo $template->file2HTML($GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/tpl/common.html");
 					exit();
 				}
 				//認証成功->ログイン

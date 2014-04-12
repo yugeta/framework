@@ -37,6 +37,7 @@ class ACCOUNT{
 			$GLOBALS['view']['message'] = "登録情報を更新しました。";
 			$_REQUEST['p2'] = "account";
 			$_REQUEST['m'] = "setting";
+			
 		}
 		//登録画面
 		else{
@@ -183,13 +184,14 @@ class ACCOUNT{
 		
 		//session更新
 		unset($data2);
+		$data2['service'] = $data[1];
+		$data2['auth'] = $data[2];
 		$data2['id'] = $data[3];
 		$data2['name'] = $data[5];
 		$data2['mail'] = $data[6];
 		$data2['img'] = $data[7];
-		$data2['service'] = $data[1];
-		$data2['auth'] = $data[2];
 		
+		//session情報更新
 		$login = new LOGIN();
 		$login->setSessionData($data2);
 		
@@ -218,8 +220,8 @@ class ACCOUNT{
 			
 			//論理削除フラグフラグ
 			if($sp[0]!="0"){
-			    $pw_data="";
-			    continue;
+				$pw_data="";
+				continue;
 			}
 			
 			//アカウント判別
@@ -231,9 +233,16 @@ class ACCOUNT{
 	
 	//アカウント画像
 	function getAccountImage(){
+		//die("b:".$_SESSION['img']);
+		//$string = new STRING();
 		
+		//$imgFile = str_replace("%","%25",$_SESSION['img']);
+		//die("file : ".is_file("data/common/account/https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid%3Fid%3DAItOawkVahVTA4B0dTSfV9xlxoHrFSfliBxlriM.jpg")." : ".file_exists($imgFile)."<br>\n".$imgFile."<br>\n"."data/common/account/https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid%3Fid%3DAItOawkVahVTA4B0dTSfV9xlxoHrFSfliBxlriM.jpg");
+		//$imgFile = urlencode($_SESSION['img']);
+		//die("b:".is_file($imgFile)." : ".is_file($_SESSION['img'])." : ".$imgFile);
 		if($_SESSION['img'] && is_file($_SESSION['img'])){
-			return "<img class='account_image' src='".$_SESSION['img']."' />";
+			$imgFile = str_replace("%","%25",$_SESSION['img']);
+			return "<img class='account_image' src='".$imgFile."?".date(YmdHis)."' />";
 		}
 		//デフォルト画像
 		else{
@@ -248,11 +257,16 @@ class ACCOUNT{
 		//UID指定がない場合は処理無し
 		if(!$user_id){return;}
 		
-		$html="";
+		//$string = new STRING();
 		
+		
+		
+		$html="";
+		//die("a:".$_SESSION['img']);
 		//画像表示
 		if($_SESSION['img'] && is_file($_SESSION['img'])){
-			$html.= "<img class='account_image' src='".$_SESSION['img']."'>\n";
+			$imgFile = str_replace("%","%25",$_SESSION['img']);
+			$html.= "<img class='account_image' src='".$imgFile."?".date(YmdHis)."'>\n";
 			$html.= "<br>\n";
 		}
 		else{

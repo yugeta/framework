@@ -105,11 +105,25 @@ class OPENID{
 	function getReturnData($service,$mode){
 		
 		$val = $_REQUEST[$GLOBALS['sys']['openid'][$service]['request'][$mode]];
-		
+		/*
+		//ID用入れ替え文字処理
+		if($GLOBALS['sys']['openid'][$service]['id_replace']['str_replace']){
+			$val = str_replace($GLOBALS['sys']['openid'][$service]['id_replace']['str_replace'],"",$val);
+		}
+		*/
+		//echo "<pre>\ntest-\n".urlencode($val)."\n</pre>";exit;
 		//特殊文字変換
+		$val = urlencode($val);
+		//$string = new STRING();
+		//$val = $string->fileNameEncode($val);
+		/*
 		$val = str_replace(",","&#44;",$val);
 		$val = str_replace(":","&#58;",$val);
+		$val = str_replace("/","&#47;",$val);
+		*/
 		
+		//die($GLOBALS['sys']['openid'][$service]['id_replace']['str_replace']." : ".$val);
+		//die($val);
 		
 		return $val;
 	}
