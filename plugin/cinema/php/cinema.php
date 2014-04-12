@@ -2,7 +2,12 @@
 
 class CINEMA{
 	
+	//menu
 	function lists(){
+		
+		
+		
+		
 		return "lists";
 	}
 	

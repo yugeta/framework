@@ -78,7 +78,7 @@
 				//画像をセット
 				var account_image = parent.document.getElementById("account_image");
 				if(account_image!=null){
-					account_image.innerHTML = "<img class='account_image' src='"+path+filename+"?"+(+new Date())+"'>";
+					account_image.innerHTML = "<img class='account_image' src='"+path+filename.split("%").join("%25")+"?"+(+new Date())+"'>";
 				}
 			}
 		}

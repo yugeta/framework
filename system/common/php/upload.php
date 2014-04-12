@@ -40,6 +40,7 @@ class UPLOAD{
 		else{
 			$file = $_FILES['file1']['name'];
 		}
+		$file = urlencode($file);
 		
 		//既存データがある場合は削除
 		if(is_file($_REQUEST['path'].$file)){
