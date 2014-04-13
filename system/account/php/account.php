@@ -93,7 +93,7 @@ class ACCOUNT{
 					"mail"=>$sp[6]
 				);
 				*/
-				
+				$data["no"] = $i;
 				$data["flg"]  = $sp[0];
 				$data["service"]= $sp[1];
 				$data["auth"] = $sp[2];
@@ -101,6 +101,7 @@ class ACCOUNT{
 				$data["pw"]   = $sp[4];
 				$data["nm"]   = $sp[5];
 				$data["mail"] = $sp[6];
+				
 				
 				$flg++;
 			}
@@ -124,6 +125,8 @@ class ACCOUNT{
 		//アカウントデータ読み込み
 		$datas = explode("\n",file_get_contents($this->user_file));
 		
+		$no = "";
+		
 		for($i=0,$c=count($datas);$i<$c;$i++){
 			$sp = explode(",",$datas[$i]);
 			
@@ -144,11 +147,15 @@ class ACCOUNT{
 			//データ上書き
 			unset($account);
 			$account = $sp;
+			$no = $i;
 		}
 		
 		if(!count($account)){die("NG");}
 		
-		if($mode=="flg"){
+		if($mode=="no"){
+			return $no;
+		}
+		else if($mode=="flg"){
 			return $account[0];
 		}
 		else if($mode=="service"){
@@ -167,11 +174,12 @@ class ACCOUNT{
 			return $account[5];
 		}
 		else if($mode=="mail"){
-		 	return $account[6];
+			return $account[6];
 		}
 		else if($mode=="img"){
-		 	return $account[7];
+			return $account[7];
 		}
+		
 	}
 	//アカウントデータの書き込み
 	function setAccount($data){
@@ -181,6 +189,9 @@ class ACCOUNT{
 		
 		//[ 0:flg 1:service 2:auth 3:ID 4:PassWord 5:Name 6:Mail 7:image ]
 		file_put_contents($this->user_file , join(",",$data).",\n" , FILE_APPEND);
+		
+		//$dataControl = new DATA_CONTROL();
+		//$dataControl->setFileUpdate($this->user_file,"","","");
 		
 		//session更新
 		unset($data2);
@@ -240,9 +251,11 @@ class ACCOUNT{
 		//die("file : ".is_file("data/common/account/https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid%3Fid%3DAItOawkVahVTA4B0dTSfV9xlxoHrFSfliBxlriM.jpg")." : ".file_exists($imgFile)."<br>\n".$imgFile."<br>\n"."data/common/account/https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid%3Fid%3DAItOawkVahVTA4B0dTSfV9xlxoHrFSfliBxlriM.jpg");
 		//$imgFile = urlencode($_SESSION['img']);
 		//die("b:".is_file($imgFile)." : ".is_file($_SESSION['img'])." : ".$imgFile);
+		//die("img : ".$_SESSION['img']);
+		
 		if($_SESSION['img'] && is_file($_SESSION['img'])){
 			$imgFile = str_replace("%","%25",$_SESSION['img']);
-			return "<img class='account_image' src='".$imgFile."?".date(YmdHis)."' />";
+			return "<img class='account_image' src='".$imgFile."?".date(YmdHis)."' title='".$_SESSION['no']."' />";
 		}
 		//デフォルト画像
 		else{
@@ -266,7 +279,7 @@ class ACCOUNT{
 		//画像表示
 		if($_SESSION['img'] && is_file($_SESSION['img'])){
 			$imgFile = str_replace("%","%25",$_SESSION['img']);
-			$html.= "<img class='account_image' src='".$imgFile."?".date(YmdHis)."'>\n";
+			$html.= "<img class='account_image' src='".$imgFile."?".date(YmdHis)."' title='".$_SESSION['no']."' />\n";
 			$html.= "<br>\n";
 		}
 		else{

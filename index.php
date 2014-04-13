@@ -25,7 +25,14 @@ $GLOBALS['view']['contents'] = '';//コンテンツ箇所の内部HTML
 /*----------
  * 関数
 ----------*/
+$system_class = $GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/php/common.php";
+if(!file_exists($system_class)){
+	echo "Error (system file not found.) : ".$system_class;
+	exit();
+}
+
 //class定義
+require_once $system_class;
 $common = new SYSTEM_COMMON();
 
 //Directory require (plugin/php)
@@ -42,67 +49,7 @@ $common->requires($GLOBALS['sys']['system']."/openid/php/");
 $common->requires($GLOBALS['sys']['system']."/bootstrap/php/");
 */
 
-class SYSTEM_COMMON{
-	
-	//Load-config
-	function loadConfig($file=null){
-		
-		if(!$file){return;}
-		
-		//$file = "data/".$data_file;
-		
-		unset($data);
-		
-		//database
-		if(file_exists($file)){
-			$datas = explode("\n",file_get_contents($file));
-			
-			$lines="";
-			
-			for($i=0,$c=count($datas);$i<$c;$i++){
-				
-				if($datas[$i]==""){continue;}
-				
-				// #で始まる行はコメント行
-				$d1 = explode("#",$datas[$i]);
-				$datas[$i] = $d1[0];
-				
-				$lines.= $datas[$i]."\n";
-			}
-			
-			//JSON -> HASH
-			if($lines){
-				$data = json_decode($lines,true);
-			}
-			
-		}
-		return $data;
-	}
-	
-	
-	//Directory require (plugin/php)
-	function requires($dir=null){
-		
-		//フォルダが存在しない場合は処理しない
-		if(!$dir || !is_dir($dir)){return;}
-		
-		//フォルダ指定で「/」で終わっていない場合は、付与する
-		if(!preg_match("@\/$@",$dir)){$dir.= '/';}
-		
-		//対象フォルダ内のファイル一覧取得
-		$php = scandir($dir);
-		
-		//フィアル別処理
-		for($i=0,$c=count($php);$i<$c;$i++){
-			
-			//システムファイルは無視 || phpファイル以外は無視
-			if($php[$i]=='.' || $php[$i]=='..' || !preg_match('/^(.*)\.php$/',$php[$i])){continue;}
-			
-			//include処理
-			require_once $dir.$php[$i];
-		}
-	}
-}
+
 
 /*----------
  * 認証 -> 表示
@@ -130,7 +77,10 @@ $f = ($_REQUEST['f'])?$_REQUEST['f']:$GLOBALS['sys']['common'];
 
 
 //pluginのモジュール一括読み込み
-if(!$_REQUEST['p'] || $_REQUEST['p']==$GLOBALS['sys']['common']){
+if($m=="login"){
+	$dir = $GLOBALS['sys']['system']."/login/html/";
+}
+else if(!$_REQUEST['p'] || $_REQUEST['p']==$GLOBALS['sys']['common']){
 	if($_REQUEST['p2'] ){
 		$dir = $GLOBALS['sys']['system']."/".$_REQUEST['p2'] ."/html/";
 	}
@@ -163,7 +113,7 @@ if($_REQUEST['p'] && $_REQUEST['frame'] && is_file($GLOBALS['sys']['plugin']."/"
 	$frame = $GLOBALS['sys']['plugin']."/".$$_REQUEST['p']."/tpl/".$_REQUEST['frame'];
 }
 else{
-	$frame = $GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/tpl/".$GLOBALS['sys']['config']['tpl_frame'];
+	$frame = $GLOBALS['sys']['system']."/template/tpl/".$GLOBALS['sys']['config']['tpl_frame'];
 }
 echo $template->file2HTML($frame);
 

@@ -1,0 +1,43 @@
+<form name='form1' method='post'>
+	<input type='hidden' name='m' value='login' />
+	
+	<div class='contents base-default base-color-gray'>
+		
+		<h3><i class='glyphicon glyphicon-log-in'></i> LOGIN</h3>
+		
+		<div class='message'><!--%globals:view:message%--></div>
+		
+		<div class='input_area'>
+			<input type='text' name='id' class='form-control' placeholder='ID'/>
+			<input type='password' name='pw' class='form-control' placeholder='Password'/>
+			<label class='login_keep'>
+				<input type='checkbox' name='cookie_time' value='86400'> ※ログインしたままにする
+			</label><br>
+			<div style='text-align:right;'>
+				<input type='submit' value='login' class='btn btn-default' />
+			</div>
+		</div>
+		
+		<h5><i class='glyphicon glyphicon-flag'></i> Sign-in with Open-ID</h5>
+		<div class='btn-group'>
+			<!--%class:openid:view_button("google")%-->
+			<!--%class:openid:view_button("mixi")%-->
+			<!--%class:openid:view_button("yahoo")%-->
+		</div>
+		
+		<div class='btn-group' style='display:none;'>
+			<!--%class:openid:view_button("google","check")%-->
+			<!--%class:openid:view_button("mixi","check")%-->
+			<!--%class:openid:view_button("yahoo","check")%-->
+		</div>
+		
+		<div class='login_sns' style='display:none;'>
+			Check<br>
+			
+			<a class='openid_link' href='?m=openid&service=gmail&check=true'><img src='<!--%globals:sys:system%-->/<!--%globals:sys:common%-->/img/sns/social_google_box.png'> Sign in with Gmail</a>
+		</div>
+		
+		<h4><a href='?m=regist' class='btn btn-warning btn-sm'><i class='glyphicon glyphicon-user'> 新規ユーザー登録</i></a></h4>
+	</div>
+	
+</form>
