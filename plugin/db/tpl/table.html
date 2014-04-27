@@ -1,0 +1,67 @@
+<form name='form2' method='get'>
+	<input type='hidden' name='tool' value='<!--%request:tool%-->'>
+	<input type='hidden' name='menu' value='<!--%request:menu%-->'>
+	
+	<div class='inis'>
+		データ切り替え：
+		<!--送信JS：$IDEACOMPO.<!--%request:tool%-->.inis_change(this)-->
+		<select name='ini' onchange='this.form.submit()'>
+			<option value=''>* 新規追加 *</option>
+			<!--%class:DB_COMMON:table_select_options%-->
+		</select>
+	</div>
+</form>
+
+
+<form name='form1' method='post' action='<!--%class:URL:url%-->'>
+	<input type='hidden' name='tool' value='<!--%request:tool%-->'>
+	<input type='hidden' name='menu' value='<!--%request:menu%-->'>
+	<input type='hidden' name='ini' value='<!--%request:ini%-->'>
+	<input type='hidden' name='action' value='write'>
+
+	<div class='db'>
+		名称：<input type='text' name='db[name]' value='<!--%class:DB_COMMON:table_value(name,<!--#request:ini#-->)%-->' />
+	</div>
+
+	<div class='db'>
+		タイプ：<input type='hidden' name='db[type]' value='<!--%class:DB_COMMON:table_value(type,<!--#request:ini#-->)%-->' />
+		<select onchange='document.form1["db[type]"].value = this.value;'>
+			<option value='master'>マスター</option>
+			<option value='data'>データ</option>
+		</select>
+	</div>
+
+	<table class='master_table'>
+		<tbody>
+			<tr>
+				<!--<th style='width:50px;' class='flg'>Flg</th>-->
+				<th style='width:50px;'>ID</th>
+				<th style='width:100px;'>Name</th>
+				<th style='width:100px;'>マスター</th>
+				<th style='width:100px;'>マスター対象番号</th>
+				<th style='width:100px;'>Default値</th>
+				<th>Comment</th>
+			</tr>
+		</tbody>
+		
+		<tbody>
+<!--%class:DB_COMMON:table_data(<!--#request:ini#-->)%-->
+		</tbody>
+		
+		<tbody>
+			<tr>
+				<th colspan='6' style='text-align:right;'>
+					<!--
+					<input type='button' value='削除したリストを表示'>
+					-->
+					<input type='button' value='データ削除' onclick='$IDEACOMPO.db.list.del()'>
+					<input type='button' value='リスト追加' onclick='$IDEACOMPO.db.list.add()'>
+					<input type='submit' value='データ保存'>
+				</th>
+			</tr>
+		</tbody>
+		
+	</table>
+</form>
+
+

@@ -1,0 +1,30 @@
+
+<div class='inis'>
+	<form name='form1' method='post'>
+	<input type='hidden' name='tool' value='<!--%request:tool%-->'>
+	<input type='hidden' name='menu' value='<!--%request:menu%-->'>
+
+	<select name='ini' onchange='$IDEACOMPO.<!--%request:tool%-->.datas.inis_change(this)'>
+	<option value=''></option>
+	<!--%class:DB_COMMON:table_select_options%-->
+	</select>
+</div>
+
+<div class='datas'>
+<table class='datas'>
+
+<tbody id='cell_headers'>
+<tr class='data-header'>
+<th class='id'>ID</th>
+<!--%class:DB_COMMON:heads%-->
+</tr>
+</tbody>
+
+<tbody id='cell_datas'>
+<!--%class:DB_COMMON:datas%-->
+</tbody>
+
+</table>
+
+<div><input class='row_add' type='button' value='行追加' onclick='$IDEACOMPO.<!--%request:tool%-->.datas.row_add()'></div>
+</div>

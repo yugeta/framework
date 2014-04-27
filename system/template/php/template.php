@@ -19,7 +19,7 @@ class template{
 	// *key[ plugin,tpl-file-name ]
 	function key2HTML($plugin="common",$file='common.html'){
 		
-		$path = $GLOBALS['sys']['plugin']."/".$plugin."/html/".$file;
+		$path = _PLUGIN."/".$plugin."/html/".$file;
 		return $this->file2HTML($path);
 		
 	}

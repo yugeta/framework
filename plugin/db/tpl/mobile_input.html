@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>データ登録</title>
+    </head>
+    <body>
+        
+        <form name='form1' method='post' action='<!--%class:URL:url%-->'>
+            <input type='hidden' name='mode' value='write'>
+            
+            <h2 class='head_title'>データ登録</h2>
+            
+            <div>日付</div>
+            <div class=''>
+                <input type='text' style='width:40px;' name='year' value='<!--%class:date:on_year%-->'> 年
+                <input type='text' style='width:20px;' name='month' value='<!--%class:date:on_month%-->'> 月
+                <input type='text' style='width:20px;' name='date' value='<!--%class:date:on_date%-->'> 日
+            </div>
+                
+            <div>金額</div>
+            <div class=''>
+                <input type='text' name='price' value='<!--%price%-->'>円
+            </div>
+            
+            <div>種別</div>
+            <div class=''>
+                <input type='text' name='group' value='<!--%group%-->'>
+            </div>
+            
+            <div>備考</div>
+            <div class=''>
+                <textarea name='etc' style='height:80px;'><!--%etc%--></textarea>
+            </div>
+            
+            <div colspan='2' style='text-align:right;'>
+                <input type='submit' value='登録'>
+            </div>
+            
+        </form>
+        
+    </body>
+</html>

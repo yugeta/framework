@@ -1,6 +1,9 @@
 <?
-
 class LOGIN{
+	
+	/*==========
+	　初期設定
+	==========*/
 	
 	//対象ファイル(file)
 	public $user_file = "data/common/users.dat";
@@ -8,12 +11,16 @@ class LOGIN{
 	//カラムマスター
 	public $session_array = array("flg","service","auth","id","name","password","mail","img");
 	
+	/*==========
+	　認証処理
+	==========*/
+	
 	//authorize [return : boolean]
 	function auth($mode=""){
 		
-		$openid = new OPENID();
+		$openid  = new OPENID();
 		$account = new ACCOUNT();
-		$url = new URL();
+		$url     = new URL();
 		
 		//ログイン処理
 		if($mode=='login'){
@@ -55,7 +62,7 @@ class LOGIN{
 					$GLOBALS['view']['html'] = "<pre>".$a.$b."</pre>";
 					//echo "OK<br>\n";
 					$template = new template();
-					echo $template->file2HTML($GLOBALS['sys']['system']."/".$GLOBALS['sys']['common']."/tpl/common.html");
+					echo $template->file2HTML(_SYSTEM."/"._COMMON."/tpl/common.html");
 					exit();
 				}
 				//認証成功->ログイン

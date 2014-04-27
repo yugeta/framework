@@ -260,7 +260,7 @@ class ACCOUNT{
 		//デフォルト画像
 		else{
 			$template = new TEMPLATE();
-			return $template->file2HTML($GLOBALS['sys']['system']."/account/html/account_image_default.html");
+			return $template->file2HTML(_SYSTEM."/account/html/account_image_default.html");
 		}
 		
 	}
@@ -284,7 +284,7 @@ class ACCOUNT{
 		}
 		else{
 			$tpl = new TEMPLATE();
-			$html.= $tpl->file2HTML($GLOBALS['sys']['system']."/account/html/account_image_default.html");
+			$html.= $tpl->file2HTML(_SYSTEM."/account/html/account_image_default.html");
 			$html.= "<br>\n";
 		}
 		
