@@ -1,0 +1,56 @@
+<div class='inis'>
+	<form name='form2' method='post'>
+	<input type='hidden' name='tool' value='<!--%request:tool%-->'>
+	<input type='hidden' name='menu' value='<!--%request:menu%-->'>
+
+	<select name='ini' onchange='$IDEACOMPO.<!--%request:tool%-->.inis_change(this)'>
+	<option value=''></option>
+	<!--%class:datas:inis%-->
+	</select>
+	</form>
+</div>
+
+
+<table class='master' id='master'>
+<tr>
+	
+	<td class='list' style='width:250px;'>
+		<form name='form0' method='post' action='<!--%class:URL:url%-->'>
+		<input type='hidden' name='tool' value='<!--%request:tool%-->'>
+		<input type='hidden' name='menu' value='<!--%request:menu%-->'>
+		<input type='hidden' name='action' value=''>
+		<input type='hidden' name='master_title' value=''>
+		
+		<table class='master_table'>
+			
+			<tr>
+				<th style='width:30px;'>Flg</th>
+				<th>Name</th>
+			</tr>
+			
+			<!--%class:<!--#request:menu#-->:lists(<!--#define:UID#-->)%-->
+			
+			<tr>
+				<th colspan='2' style='text-align:right;'>
+					<input class='list_del' type='button' value='削除' onclick='$IDEACOMPO.<!--%request:tool%-->.lists.del()'>
+					<input class='list_add' type='button' value='追加' onclick='$IDEACOMPO.<!--%request:tool%-->.lists.add()'>
+				</th>
+			</tr>
+		</table>
+		</form>
+	</td>
+	
+	<td class='data'>
+		<form name='form1' method='post' action='<!--%class:URL:url%-->'>
+		<input type='hidden' name='tool' value='<!--%request:tool%-->'>
+		<input type='hidden' name='menu' value='<!--%request:menu%-->'>
+		<input type='hidden' name='ini' value='<!--%request:ini%-->'>
+		<input type='hidden' name='action' value='write'>
+		<!--%class:<!--#request:menu#-->:datas_view(<!--#define:UID#-->,<!--#request:ini#-->)%-->
+		</form>
+	</td>
+	
+</tr>
+</table>
+
+

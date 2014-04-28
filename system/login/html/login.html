@@ -1,5 +1,6 @@
 <form name='form1' method='post'>
 	<input type='hidden' name='m' value='login' />
+	<input type='hidden' name='a' value='login' />
 	
 	<div class='contents base-default base-color-gray'>
 		
@@ -8,8 +9,8 @@
 		<div class='message'><!--%globals:view:message%--></div>
 		
 		<div class='input_area'>
-			<input type='text' name='id' class='form-control' placeholder='ID'/>
-			<input type='password' name='pw' class='form-control' placeholder='Password'/>
+			<input type='text' name='id' class='form-control' value='<!--%request:id%-->' placeholder='ID'/>
+			<input type='password' name='pw' class='form-control' value='<!--%request:pw%-->' placeholder='Password'/>
 			<label class='login_keep'>
 				<input type='checkbox' name='cookie_time' value='86400'> ※ログインしたままにする
 			</label><br>

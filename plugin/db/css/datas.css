@@ -1,0 +1,46 @@
+
+table.datas{
+	border-collapse:collapse;
+}
+.datas tr{
+	background-color:white;
+	min-height:25px;
+}
+.datas th,.datas td{
+	margin:0;
+	padding:4px;
+}
+.datas th{
+	border:1px solid white;
+	background-color:#333;
+	color:white;
+	min-width:100px;
+}
+.datas td{
+	border:1px solid #333;
+	color:black;
+	min-width:100px;
+}
+
+.datas th.id,.datas td.id{
+	width:50px;
+	min-width:50px;
+}
+
+.row_add{
+	width:200px;
+	margin:4px;
+}
+.datas th.cell,.datas td.cell{
+	padding:0;
+}
+td.cell input{
+	border:0;
+	padding:0;
+	margin:0;
+	width:100%;
+	height:100%;
+	padding:100;
+	background-color:transparent;
+}
+

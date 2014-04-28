@@ -140,7 +140,7 @@ class OPENID{
 		$template = new template();
 		
 		if($GLOBALS['sys']['openid'][$service]['flg']=="true"){
-			return $template->file2HTML($GLOBALS['sys']['system']."/openid/html/".$service.".html");
+			return $template->file2HTML(_SYSTEM."/openid/html/".$service.".html");
 		}
 	}
 }

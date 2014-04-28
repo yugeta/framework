@@ -1,0 +1,21 @@
+{
+	# データベースタイプ [ file , mysql , mongodb , couchdb ]-----
+	"database_type":"file",
+
+	# ログイン後のデフォルトTOOL（プラグインID）[ null:system ]-----
+	"default_plugin":"cinema",
+	
+	# デフォルトのHTMLテンプレート（フレーム）
+	"tpl_frame":"common.html",
+	
+	# root Module ファイル名定義
+	"root_index":"",
+	"root_login":"login.php",
+	"root_common":"common.php",
+	
+	# -----
+	"$":""
+}
+
+
+

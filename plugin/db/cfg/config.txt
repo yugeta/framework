@@ -1,0 +1,16 @@
+name=DataBase
+name_class=red,red,red,red,invert,
+type=service
+
+menu_default=master
+
+menu[table]=テーブル登録,テーブル登録
+//menu[master]=マスターメンテ,マスターメンテ
+menu[datas]=マスター登録,マスター登録
+menu[view]=データ表示,データ表示
+menu[input_edit]=入力ページ編集,入力ページ編集-
+//menu[input]=データ入力,データ入力
+
+#menu[trash]=ゴミ箱,削除したデータ表示
+
+menu[mobile]=モバイル入力,モバイル入力
