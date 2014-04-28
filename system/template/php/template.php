@@ -14,7 +14,7 @@
    + 　　param:--- 受け渡し値
 ==========*/
 
-class template{
+class TEMPLATE{
 	
 	// *key[ plugin,tpl-file-name ]
 	function key2HTML($plugin="common",$file='common.html'){
@@ -26,12 +26,8 @@ class template{
 	
 	// *file[ path ]
 	function file2HTML($file=""){
-		if(!$file){return;}
 		
-		$path = $file;
-		if(!file_exists($path)){return;}
-		
-		$data = file_get_contents($path);
+		if(!$file || !file_exists($file)){return;}
 		
 		//ファイルを読み込み
 		$tpl = file_get_contents($file);
@@ -61,8 +57,6 @@ class template{
 				
 				$key = strtolower($data[0]);
 				$val = join(":",array_slice($data,1));
-				//array_shift($data);
-				//$val = join(":",$data);
 				
 				//関数の直接実行
 				if($key=="function"){
@@ -194,17 +188,12 @@ class template{
 		if($data[1]==""){$ptn="''";}
 		
 		$val='';
-		//$ptn = str_replace("/","",$ptn);
-		//$ptn = str_replace(".","",$ptn);
-		//$ptn = str_replace(":","",$ptn);
 		if(eval("if(".$ptn."){return 1;}else{return 0;}")){
 			$val = $data[2];
 		}
 		else if($data[3]){
 			$val = $data[3];
 		}
-		
-		//echo $data[1]."/".$val."/".join(":",$data)." : ".$ptn."\n";
 		
 		return str_replace("<!--".$sp.join(":",$data).$sp."-->" , $val , $tpl);
 	}

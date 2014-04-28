@@ -25,12 +25,15 @@ class URL{
 	
 	//現在ページのサービスroot階層のパスを返す
 	function getDir(){
-		$uri = $this->getSite();
-		$dir = explode('/',$_SERVER['REQUEST_URI']);
-		if(count($dir)>1){
-			$uri.= join('/',array_pop($dir));
+		
+		$path = preg_match("@^/@","",$_SERVER['REQUEST_URI']);
+		
+		if(is_dir($path)){
+			return $path;
 		}
-		return $uri;
+		else{
+			return dirname($path);
+		}
 	}
 	
 	//現在のクエリ無しパスを返す

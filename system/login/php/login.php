@@ -6,7 +6,8 @@ class LOGIN{
 	==========*/
 	
 	//対象ファイル(file)
-	public $user_file = "data/common/users.dat";
+	public $user_file = "data/system/users.dat";
+	public $pass_file = "data/system/passwd.dat";
 	
 	//カラムマスター
 	public $session_array = array("flg","service","auth","id","name","password","mail","img");
@@ -123,15 +124,19 @@ class LOGIN{
 	
 	//ログイン処理※errorの場合は、対象文言を保存する。
 	function setLogin($id="",$pw=""){
-			//未入力
+		
+		//未入力
 		if(!$id && !$pw){
-			$GLOBALS['view']['message'] = "アカウントIDとパスワードを入力してください。";
+			//$GLOBALS['view']['message'] = "アカウントIDとパスワードを入力してください。";
+			return array(
+				"flg"=>false,
+				"message"=>"IDとパスワードを入力してください。"
+			);
 		}
 		
 		//認証成功※open-idは無し
 		else if($this->login_check("",$id,$pw)){
-			//return true;
-			
+			/*
 			$url = new URL();
 			
 			if(!$_REQUEST['p'] && $_REQUEST['p']=='common'){
@@ -140,15 +145,23 @@ class LOGIN{
 			else{
 				header("Location: ".$url->getUrl()."?p=".$_REQUEST['p']);
 			}
-			
+			*/
+			return array(
+				"flg"=>true,
+				"action"=>"redirect"
+			);
 		}
 		
 		//認証失敗
 		else{
-			$GLOBALS['view']['message'] = "アカウントIDまたはパスワードが違います。";
+			//$GLOBALS['view']['message'] = "アカウントIDまたはパスワードが違います。";
+			return array(
+				"flg"=>false,
+				"message"=>"IDまたはパスワードが違います。"
+			);
 		}
 		
-		$_REQUEST['m']='login';
+		//$_REQUEST['m']='login';
 		
 	}
 	
@@ -156,7 +169,9 @@ class LOGIN{
 	function setLogout(){
 		
 		//セッション情報を削除
-		unset($_SESSION['id']);
+		foreach($_SESSION as $key=>$val){
+			unset($_SESSION[$key]);
+		}
 		
 		//cookie情報の削除
 		
@@ -168,7 +183,7 @@ class LOGIN{
 	}
 	
 	//Login-check
-	function login_check($service,$id,$pw){
+	function login_check($service="",$id="",$pw=""){
 		
 		if($id==''){return;}
 		
@@ -198,8 +213,8 @@ class LOGIN{
 		}
 		
 		//セッションデータ保持
-		//$_SESSION['id'] = $id;
-		$this->setSessionData($data);
+		$_SESSION['id'] = $id;
+		//$this->setSessionData($id);
 		
 		//クッキー時間の書き換え
 		if($_REQUEST['cookie_time']){
@@ -208,7 +223,10 @@ class LOGIN{
 		}
 		
 		//認証成功
-		return true;
+		return array(
+			"flg"=>true
+		);
+		
 	}
 	
 	/*----------
@@ -226,45 +244,50 @@ class LOGIN{
 	}
 	function login_check_file($service,$id,$pw){
 		
-		$file = $this->user_file;
-		//$file = "data/common/users.dat";
-		
-		if(!file_exists($file)){return;}
+		if(!file_exists($this->pass_file)){return;}
 		
 		//ユーザーデータ読み込み
-		$data_users = explode("\n",file_get_contents($file));
+		$data_users = explode("\n",file_get_contents($this->pass_file));
 		
-		unset($pw_data,$buf);
+		//unset($pw_data,$buf);
 		
 		//データ内のライン処理
-		$no="";
+		// [ 0:flg 1:service 2:user-id 3:password]
+		$no=0;
+		$pw_data="";
 		for($i=0,$c=count($data_users);$i<$c;$i++){
 			//ラインの文字列を分解
 			$sp = explode(",",$data_users[$i]);
 			
 			//データカラムチェック
-			if(count($sp)<4){continue;}
+			//if($sp[0]!='0'){continue;}
 			
 			//service(open-id)チェック
-			if($sp[1]!=$service){
-				continue;
-			}
-			
-			//論理削除フラグフラグ
-			if($sp[0]!="0"){
-				$pw_data="";
-				continue;
-			}
+			if($sp[1]!=$service){continue;}
 			
 			//アカウント判別
-			if($sp[3]!=$id){continue;}
+			if($sp[2]==$id){
+				//パスワード保持
+				if($sp[0]=="0"){
+					$pw_data = $sp[3];
+				}
+				//論理削除フラグフラグ
+				else{
+					$pw_data = "";
+				}
+				$no++;
+			}
 			
-			//パスワード保持
-			$pw_data = $sp[4];
-			$buf = $sp;
-			$no = $i;
+			//$buf = $sp;
+			
 		}
 		
+		//判定
+		if($no==0){return;}
+		else if($pw_data!=$pw){return;}
+		else {return true;}
+		
+		/*
 		//パスワード確認
 		if($pw_data == $pw){
 			
@@ -280,6 +303,7 @@ class LOGIN{
 			//die($pw."/".$buf[5]);
 			return $data;
 		}
+		*/
 	}
 	
 	
