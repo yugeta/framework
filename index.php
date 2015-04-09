@@ -163,6 +163,12 @@ class fw_define{
 
         return $html;
     }
+
+    function fw_auth(){
+        $libAuth = new libAuth();
+        return true;
+
+    }
 }
 
 class fw_root extends fw_define{
@@ -175,6 +181,10 @@ class fw_root extends fw_define{
 
         //システム変数（クエリ）の調整
         $this->fw_query();
+
+        //認証
+        $libAuth = new libAuth();
+        if(!$libAuth->fw_auth()){return;}
 
         //指定pluginの読み込み
         $fw_index = new fw_index();
