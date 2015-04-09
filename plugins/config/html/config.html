@@ -1,0 +1,39 @@
+<script type='text/javascript' src='<%class:fw_define:getPath(define_plugins,sample)%>/js/config.js'></script>
+<link rel="stylesheet" type="text/css" href="<%class:fw_define:getPath(define_plugins,sample)%>/css/config.css">
+
+<form  method="post" name="form1">
+<input type="hidden" name="plugin" value="sample">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="config" value="<%request:config%>">
+<input type="hidden" name="plugins" value="config">
+
+<div style="padding:0px;position:relative;" class="row-fluid">
+	<div class="index-word">
+
+		<div style="height:20px;"></div>
+
+		<p>Plugin</p>
+		<select class="config">
+<%class:sample_common:viewSelectPlugins(<#request:config#>)%>
+		</select>
+
+		<p>Name</p>
+		<input type="text" name="data[name]" value="<%class:sample_common:getGlobals(<#request:config#>,name)%>">
+
+		<p>Design</p>
+		<select name="data[theme]">
+<%class:sample_common:viewSelectDesign(<#request:config#>,theme)%>
+		</select>
+
+		<p>Menu</p>
+		<textarea name="menu"><%class:sample_common:getJson(menu)%></textarea>
+
+		<div style="margin:20px;">
+			<input type="submit" value="update" class="btn">
+		</div>
+
+
+	</div>
+</div>
+
+</form>

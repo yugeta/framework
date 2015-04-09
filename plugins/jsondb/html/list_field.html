@@ -1,0 +1,37 @@
+<link rel="stylesheet" type="text/css" href="<%class:fw_define:define_plugins%>/<%request:plugins%>/css/common.css">
+
+<script type="text/javascript" src="<%class:fw_define:define_plugins%>/library/js/lib.js"></script>
+<script type="text/javascript" src="<%class:fw_define:define_plugins%>/<%request:plugins%>/js/common.js"></script>
+
+
+<h2>Field</h2>
+
+<h3>Pick Data</h3>
+<select class="pick_data">
+	<option value=""></option>
+	<%class:jsonDB:getDataOptions%>
+</select>
+
+<h3>New Field</h3>
+
+<form method="post" name="form1">
+	<input type="hidden" name="menu" value="<%request:menu%>">
+	<input type="hidden" name="mode" value="addData">
+
+	<div class="inputArea">
+		<div><span>名前</span><input class="addName" type="text" name="d[name]" /></div>
+		<div><span>メモ</span><input class="addName" type="text" name="d[memo]" /></div>
+		<div class="align-right"><input class="addData" type="button" value="Add" /></div>
+	</div>
+</form>
+
+<h3>Lists</h3>
+
+<table id="dataLists">
+	<tr class="menu">
+		<th class="no" style='width:40px;'>No.</th>
+		<th class="name" style='width:100px;'>Name</th>
+		<th class="memo" style='width:150px;'>Memo</th>
+	</tr>
+	<%class:jsonDB:getHtmlField%>
+</table>

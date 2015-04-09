@@ -1,0 +1,47 @@
+.inputArea span{
+	display:inline-block;
+	width:50px;
+	height:30px;
+	line-height:30px;
+	margin:10px;
+}
+.inputArea div{
+	width:min-width:300px;
+	height:30px;
+	line-height:30px;
+	margin:8px;
+}
+.align-right{
+	text-align:right;
+	width:300px;
+}
+#dataLists th{
+	width:50px;
+	background-color:#DDD;
+}
+#dataLists th,#dataLists td{
+	padding:8px;
+	border:1px solid #AAA;
+}
+#dataLists tr:hover{
+	background-color:#EEF;
+	/*cursor:pointer;*/
+}
+.option-button{
+	text-align:center;
+}
+.option-icon{
+	display:inline-block;
+	width:25px;
+
+}
+td.option{
+	text-align:center;
+}
+
+.icon-pencil,.icon-trash,.icon-arrow-right{
+	cursor:pointer;
+}
+.icon-pencil:hover,.icon-trash:hover,.icon-arrow-right:hover{
+	opacity:0.5;
+}

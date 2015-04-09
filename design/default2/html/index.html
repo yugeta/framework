@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<!-- head -->
+<head>
+<%design-tpl:common_head.html%>
+<%design-tpl:head.html%>
+</head>
+<!-- /head -->
+
+<body>
+	<div class="navbar navbar-inverse navbar-dash">
+
+		<!-- header -->
+		<div class="navbar-inner">
+			<div class="container">
+
+				<!-- Responsive-icon -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+<!-- title -->
+<%design-tpl:common_title.html%>
+<!-- /title -->
+
+				<div class="nav-collapse collapse">
+<!-- menu -->
+<%design-tpl:common_menu.html%>
+<!-- /menu -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<!-- contents -->
+<main class="bs-docs-masthead" id="content" role="main">
+	<div class="container">
+<%php:contents%>
+	</div>
+</main>
+<!-- /contents -->
+
+
+
+<!-- footer -->
+<%design-tpl:common_footer.html%>
+<!-- /footer -->
+
+</div>
+
+<!-- Library-JS -->
+<%design-tpl:common_body_js.html%>
+<!-- /Library-JS -->
+
+</body>
+</html>

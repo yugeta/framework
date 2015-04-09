@@ -1,0 +1,65 @@
+<script type="text/javascript" src="<%class:fw_define:define_plugins%>/library/js/lib.js"></script>
+<script type="text/javascript" src="<%class:fw_define:define_plugins%>/<%request:plugins%>/js/getInfo.js"></script>
+
+
+
+<h2>PHP-Info</h2>
+
+<blockquote>
+
+	<h3>Date</h3>
+	<%class:info:getDate%> <br>
+	<%class:info:server(REQUEST_TIME_FLOAT)%>
+
+	<h3>URL</h3>
+	<%class:info:url%>
+
+	<h3>User-Agent</h3>
+	<%class:info:server(HTTP_USER_AGENT)%>
+
+	<h3>Cookie</h3>
+	<%class:info:cookie%>
+
+	<h3>Session</h3>
+	<%class:info:getSession%>
+
+	<h3>IP-Address</h3>
+	server : <%class:info:server(HTTP_HOST)%> <br>
+	local : <%class:info:server(REMOTE_ADDR)%>
+
+	<h3>Temp-Port</h3>
+	<%class:info:server(REMOTE_PORT)%>
+
+	<h3>Http-Accept</h3>
+	<%class:info:server(HTTP_ACCEPT)%>
+
+	<h3>Http-Accept-Encoding</h3>
+	<%class:info:server(HTTP_ACCEPT_ENCODING)%>
+
+	<h3>SERVER_SIGNATURE</h3>
+	<%class:info:server(SERVER_SIGNATURE)%>
+
+	<h3>GATEWAY_INTERFACE</h3>
+	<%class:info:server(GATEWAY_INTERFACE)%>
+
+	<h3>SERVER_PROTOCOL</h3>
+	<%class:info:server(SERVER_PROTOCOL)%>
+
+</blockquote>
+
+<hr>
+
+<h2>JavaScript-Info</h2>
+<blockquote>
+	<h3>User-Agent</h3>
+	<div id="js_ua"></div>
+
+	<h3>Cookie</h3>
+	<div id="js_cookie"></div>
+
+	<h3>Storage</h3>
+	<div id="js_storage"></div>
+
+	
+
+</blockquote>
