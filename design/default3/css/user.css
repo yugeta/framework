@@ -1,0 +1,51 @@
+.user{
+	min-width:300px;
+	width:80%;
+	margin:10px auto;
+	border-radius:8px;
+	/*border:1px solid #DDD;*/
+	/*overflow:hidden;*/
+}
+.user table{
+	width:100%;
+}
+.user table th,.user td{
+	padding:8px;
+	border:1px solid #DDD;
+}
+
+.user table tr.contents{
+	heihgt:40px;
+	line-height:40px;
+}
+.user table tr.contents th,.user tr.contents td{
+	heihgt:40px;
+	line-height:40px;
+}
+
+.title{
+	width:100px;
+}
+
+.user table th{
+	background-color:#EEE;
+}
+
+.user table td.title{
+	font-weight:bold;
+	text-align:center;
+}
+.user table td input{
+	width:90%;
+}
+.user .button{
+	margin:20px;
+	text-align:center;
+}
+.user .button button{
+	width:200px;
+	height:40px;
+}
+.user .button button:hover{
+	opacity:0.5;
+}

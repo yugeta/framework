@@ -5,7 +5,7 @@
 <head>
 <%design-tpl:common_head.html%>
 <%design-tpl:head.html%>
-<link rel="stylesheet" href="design/<%globals:config:theme%>/css/login.css">
+<link rel="stylesheet" href="design/<%globals:config:theme%>/css/error.css">
 </head>
 <!-- /head -->
 
@@ -41,19 +41,8 @@
 <!-- contents -->
 <main class="bs-docs-masthead" id="content" role="main">
 	<div class="container">
-		<form method="post" action="<%class:libUrl:getUrl%>">
-			<input type="hidden" name="mode" value="login">
-			<div class="login">
-				<div class="title">認証</div>
-				<div class="inputs">
-					<div class="name">ID</div><div class="input"><input type="text" name="login_id" autocomplete="off"></div>
-					<div class="name">PW</div><div class="input"><input type="password" name="login_pw" autocomplete="off"></div>
-					<div class="submit"><input type="submit" value="Login"></div>
-				</div>
-			</div>
-		</form>
-		<div class="user_add">
-			<a href="?menu=addAccount">アカウントを作成</a>
+		<div class="error">
+			<%globals:message%>
 		</div>
 	</div>
 </main>

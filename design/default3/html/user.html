@@ -1,0 +1,101 @@
+<%class:libUser:setUser%>
+<!DOCTYPE html>
+<html>
+
+<!-- head -->
+<head>
+<%design-tpl:common_head.html%>
+<%design-tpl:head.html%>
+<link rel="stylesheet" href="design/<%globals:config:theme%>/css/user.css">
+</head>
+<!-- /head -->
+
+<body>
+	<div class="navbar navbar-inverse navbar-dash">
+
+		<!-- header -->
+		<div class="navbar-inner">
+			<div class="container">
+
+				<!-- Responsive-icon -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+<!-- title -->
+<%design-tpl:common_title.html%>
+<!-- /title -->
+
+				<div class="nav-collapse collapse">
+<!-- menu -->
+<%design-tpl:common_menu.html%>
+<!-- /menu -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+<h2>Userアカウント</h2>
+
+<form name="form1" method="post" action="<%class:libUrl:getUrl%>">
+<input type="hidden" name="menu" value="user">
+<input type="hidden" name="mode" value="edit">
+
+<!-- contents -->
+<main class="bs-docs-masthead" id="content" role="main">
+	<div class="container">
+		<div class="user">
+			<table>
+				<tr class="menu">
+					<th class="title">Title</th>
+					<th>Value</th>
+				</tr>
+				<tr class="contents">
+					<td class="title">Update-Time</td>
+					<td><%globals:user:update%></td>
+				</tr>
+				<tr class="contents">
+					<td class="title">User-ID</td>
+					<td><input type="text" name="user[id]" value="<%globals:user:id%>" autocomplete="off" readonly></td>
+				</tr>
+				<tr class="contents">
+					<td class="title">E-Mail</td>
+					<td><input type="text" name="user[mail]" value="<%globals:user:mail%>" autocomplete="off"></td>
+				</tr>
+				<tr class="contents">
+					<td class="title">Password</td>
+					<td class="input"><input type="password" name="login_pw" autocomplete="off" placeholder="変更する場合のみ入力してください。"></td>
+				</tr>
+			</table>
+			<div class="button"><button id="user_submit">Update</button></div>
+		</div>
+	</div>
+</main>
+<!-- /contents -->
+
+</form>
+
+<!-- footer -->
+<%design-tpl:common_footer.html%>
+<!-- /footer -->
+
+</div>
+
+<!-- Library-JS -->
+<%design-tpl:common_body_js.html%>
+<!-- /Library-JS -->
+
+<script type="text/javascript">
+var user_submit = document.getElementById("user_submit");
+if(user_submit!=null){
+	user_submit.onclick=function(){
+		if(!confirm("データを登録してもよろしいですか？")){return false}
+		document.form1.submit();
+	};
+}
+</script>
+
+</body>
+</html>

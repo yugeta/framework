@@ -18,8 +18,20 @@ class libAuth extends fw_define{
 
 	function fw_auth(){
 
+		//mode
+		if(isset($_REQUEST['menu']) && ($_REQUEST['menu']=="user")){
+			//指定pluginの表示
+			$this->fw_pluginView($_REQUEST['plugins'],$_REQUEST['menu']);
+			exit();
+		}
+		else if(isset($_REQUEST['menu']) && ($_REQUEST['menu']=="addAccount")){
+			//指定pluginの表示
+			$this->fw_pluginView($_REQUEST['plugins'],$_REQUEST['menu']);
+			exit();
+		}
+
 		//ログアウトチェック
-		if($_REQUEST['mode']=="logout"){
+		if(isset($_REQUEST['menu']) && $_REQUEST['menu']=="logout"){
 			unset($_SESSION[$this->session_name]);
 			$libUrl = new libUrl();
 			header("Location: ".$libUrl->getUrl());
@@ -27,18 +39,22 @@ class libAuth extends fw_define{
 		}
 
 		//ログイン済みチェック
-		if($_SESSION[$this->session_name]){
+		if(isset($_SESSION[$this->session_name]) && $_SESSION[$this->session_name]){
 			return true;
 		}
 
 		//認証処理
+		if(!isset($_REQUEST['login_id'])){return;}
 		$user = $this->checkUser($_REQUEST['login_id']);
 		if(!$user || !$user['id']){return;}
 
 		//認証（MD5）
 		if(md5($_REQUEST['login_pw'])===$user['md5']){
 			$this->setSession($user);
-			return true;
+			$libUrl = new libUrl();
+			header("Location: ".$libUrl->getUrl());
+			exit();
+			//return true;
 		}
 
 	}
@@ -50,13 +66,14 @@ class libAuth extends fw_define{
 		if(!is_file($users_json)){return;}
 		$datas = explode("\n",file_get_contents($users_json));
 		unset($id_flg,$user_data);
-		for($i=count($datas);$i>=0;$i--){
+		for($i=count($datas)-1;$i>=0;$i--){
 			if(!$datas[$i]){continue;}
 			$json = json_decode($datas[$i],true);
 			if($json['id']!=$user){continue;}
-			if($id_flg){continue;}
-			$id_flg++;
-			$user_data = $json;
+			//if($id_flg){continue;}
+			//$id_flg++;
+			if($json['flg']==0){$user_data = $json;}
+			break;
 		}
 		return $user_data;
 	}

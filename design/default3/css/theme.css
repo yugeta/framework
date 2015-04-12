@@ -4,6 +4,7 @@ html,body{
 
 div.navbar,div.navbar-inverse,div.navbar-dash{
 	margin-bottom:0 !important;
+	box-shadow:4px 4px 10px rgba(0,0,0,0.5);
 }
 
 /*<<bootstrap-hack*/

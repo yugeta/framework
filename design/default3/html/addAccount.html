@@ -1,0 +1,94 @@
+<%class:libUser:setUser%>
+<!DOCTYPE html>
+<html>
+
+<!-- head -->
+<head>
+<%design-tpl:common_head.html%>
+<%design-tpl:head.html%>
+<link rel="stylesheet" href="design/<%globals:config:theme%>/css/user.css">
+<link rel="stylesheet" href="design/<%globals:config:theme%>/css/error.css">
+</head>
+<!-- /head -->
+
+<body>
+	<div class="navbar navbar-inverse navbar-dash">
+
+		<!-- header -->
+		<div class="navbar-inner">
+			<div class="container">
+
+				<!-- Responsive-icon -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+<!-- title -->
+<%design-tpl:common_title.html%>
+<!-- /title -->
+
+				<div class="nav-collapse collapse">
+<!-- menu -->
+<%design-tpl:login_menu.html%>
+<!-- /menu -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+<h2>Userアカウントの作成</h2>
+
+<form name="form1" method="post" action="<%class:libUrl:getUrl%>">
+<input type="hidden" name="menu" value="user">
+<input type="hidden" name="mode" value="add">
+
+<!-- contents -->
+<main class="bs-docs-masthead" id="content" role="main">
+	<div class="container">
+		<div class="user">
+			<table>
+				<tr class="contents">
+					<th class="title">User-ID</th>
+					<td><input type="text" name="user[id]" value="<%globals:user:id%>" autocomplete="off"></td>
+				</tr>
+				<tr class="contents">
+					<th class="title">E-Mail</th>
+					<td><input type="text" name="user[mail]" value="<%globals:user:mail%>" autocomplete="off"></td>
+				</tr>
+				<tr class="contents">
+					<th class="title">Password</th>
+					<td class="input"><input type="password" name="login_pw" autocomplete="off"></td>
+				</tr>
+			</table>
+			<div class="button"><button id="user_submit">アカウントを作成</button></div>
+		</div>
+	</div>
+</main>
+<!-- /contents -->
+
+</form>
+
+<!-- footer -->
+<%design-tpl:common_footer.html%>
+<!-- /footer -->
+
+</div>
+
+<!-- Library-JS -->
+<%design-tpl:common_body_js.html%>
+<!-- /Library-JS -->
+
+<script type="text/javascript">
+var user_submit = document.getElementById("user_submit");
+if(user_submit!=null){
+	user_submit.onclick=function(){
+		if(!confirm("データを登録してもよろしいですか？")){return false}
+		document.form1.submit();
+	};
+}
+</script>
+
+</body>
+</html>
