@@ -1,0 +1,59 @@
+html,body{
+	height:100%;
+}
+
+div.navbar,div.navbar-inverse,div.navbar-dash{
+	margin-bottom:0 !important;
+}
+
+/*<<bootstrap-hack*/
+
+div.navbar-inner{
+	border-radius:0;
+	-webkit-border-radius:0;
+	border:0;
+	/*
+	background:none;
+	background-image:none !important;
+	background-color:#FED !important;
+	*/
+}
+
+/*
+a.btn-navbar{
+	background-color:#FED !important;
+}
+*/
+/*bootstrap-hack>>*/
+
+/*index*/
+.index-word{
+	max-width:1200px;
+	margin:0 20px;
+	/*position:absolute;*/
+
+	top:30px;
+	left:30px;
+	font-weight:bold;
+	font-size:16px;
+	/*color:white;*/
+	line-height:30px;
+
+
+}
+/*index*/
+
+table.lists{
+	margin:20px;
+}
+table.lists th,table.lists td{
+	min-width:100px;
+	border:1px solid #AAA;
+	padding:2px 4px;
+}
+table.lists th{
+	background-color:#EEE;
+}
+table.lists td{
+	text-align:right;
+}

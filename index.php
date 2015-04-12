@@ -22,6 +22,9 @@ class fw_define{
     // default-file(.php | .html)
     public $index = "index";
 
+
+    public $session_name = "framework_auth";
+
     function getPath($plugins,$library){
 
         return $this->{$plugins}."/".$this->{$library};
@@ -183,8 +186,13 @@ class fw_root extends fw_define{
         $this->fw_query();
 
         //認証
+        session_name($this->session_name);
+        session_start();
         $libAuth = new libAuth();
-        if(!$libAuth->fw_auth()){return;}
+        if(!$libAuth->fw_auth()){
+            $this->fw_pluginView($_REQUEST['plugins'],"login");
+            return;
+        }
 
         //指定pluginの読み込み
         $fw_index = new fw_index();

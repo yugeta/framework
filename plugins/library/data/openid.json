@@ -2,7 +2,8 @@
 	"google":{
 		"flg":"true",
 		"type":"openid_2_0",
-		"url":"https://www.google.com/accounts/o8/ud",
+		"url_bak":"https://www.google.com/accounts/o8/ud",
+		"url":"https://www.googleapis.com/plus/v1/people/me/openIdConnect",
 		"request":{
 			"id":"openid_claimed_id",
 			"mail":"openid_ext1_value_email",

@@ -61,16 +61,23 @@ class libOpenid extends fw_define{
 		//サイトへ移動
 		header("Location: ".$openid_url.$separate_value.join("&",$q));
 	}
-	function openid_2_0($service,$check=""){
+	function openid_2_0($service){
 
-		$session_id = session_id();
-		if(!$session_id){return;}
+		//http://192.168.33.12/tools/login/
+		//$session_id = session_id();
+		//if(!$session_id){return;}
+		$openid_json = $this->getJsonOpenid();//print_r($openid_json);
+		if(!$openid_json || !isset($openid_json[$service])){return;}
 
-		$openid_url = $GLOBALS['system']['openid'][$service]['url'];
+		//$openid_url = $GLOBALS['system']['openid'][$service]['url'];
+		$openid_url = $openid_json[$service]['url'];
 
-		$url = new URL();
-
+		$url = new libUrl();
 		$mysite = $url->getUrl();
+		//$mysite = "http://wordpress.ideacompo.com/";
+		$session_id = "test";
+		$check = "-";
+		$cookie_time = $_REQUEST['cookie_time'];
 
 		$data=array(
 			'openid.ns'				=> 'http://specs.openid.net/auth/2.0',
@@ -78,7 +85,7 @@ class libOpenid extends fw_define{
 			'openid.ns.max_auth_age'=> '300',
 			'openid.claimed_id'		=> 'http://specs.openid.net/auth/2.0/identifier_select',
 			'openid.identity'		=> 'http://specs.openid.net/auth/2.0/identifier_select',
-			'openid.return_to'		=> $mysite.'?page=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$_REQUEST['cookie_time'],
+			'openid.return_to'		=> $mysite.'?page=openid&service='.$service.'&action=return&session_id='.$session_id."&check=".$check."&cookie_time=".$cookie_time,
 			'openid.realm'			=> $mysite,
 			'openid.mode'			=> 'checkid_setup',
 			'openid.ui.ns'			=> 'http://specs.openid.net/extensions/ui/1.0',
@@ -103,6 +110,8 @@ class libOpenid extends fw_define{
 		}
 
 		//サイトへ移動
+		//print_r($data);exit();
+		//die($openid_url.$separate_value.join("&",$q));
 		header("Location: ".$openid_url.$separate_value.join("&",$q));
 	}
 
